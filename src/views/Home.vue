@@ -7,14 +7,14 @@
       <a href="#" class="text-xl">about</a>
     </div>
     <div class="flex-col px-8 mx-auto justify-center" style="max-width: 960px;">
-      <div class="text-left mb-8">
-        <h2 class="text-2xl text-gray-100 mb-2">
+      <div class="text-center mb-8">
+        <h2 class="text-lg font-bold text-gray-100 mb-0">
           Thank you, {{ recipientName }}!
         </h2>
-        <h3 class="text-md mb-10 leading-tight text-gray-200">
-          {{ organizationName }} appreciates your help.
+        <h3 class="text-2xl mb-10 leading-tight text-gray-200">
+          You had a meaningful impact.
           <br />
-          Watch the video made especially for you as we show our gratitude
+          {{ beneficiaryName }} wants to tell you about it.
         </h3>
       </div>
 
@@ -29,8 +29,12 @@
         ></iframe>
       </div>
 
-      <div class="text-center mb-8">
-        {{ message }}
+      <div class="text-enter mb-8">
+        It makes a big difference to have you as part of our community. Want to
+        have more impact? Here
+        <span v-if="callsToAction.length === 1">is one opportunity:</span>
+        <span v-if="callsToAction.length === 2">are two opportunities:</span>
+        <span v-if="callsToAction.length === 3">are three opportunities:</span>
       </div>
 
       <div class="flex justify-center">
@@ -60,13 +64,15 @@ export default {
     return {
       recipientName: "Margie",
       organizationName: "MCC Toronto",
+      beneficiaryName: "Josie",
       videoLink: "https://player.vimeo.com/video/343099753",
       message:
-        "MCC Toronto depends on our volunteers to keep us going. Click below to continue your work with us as a member of our community.",
+        "It makes a big difference to have you as part of our community. Want to have more impact?",
       callsToAction: [
         {
           buttonText: "Volunteer",
-          description: "Volunteer your time with MCC Toronto.",
+          description:
+            "There are so many other ways to belong to our community.",
           type: "LINK",
           url: "https://google.ca"
         },
