@@ -1,17 +1,15 @@
 <template>
   <div>
+    <nav-bar about />
     <div
-      class="flex justify-between items-baseline block py-5 px-8 border-b-2 border-white mb-8"
+      class="flex-col px-0 md:px-8 mx-auto justify-center"
+      style="max-width: 960px;"
     >
-      <h1 class="italic font-bold text-2xl">gratitude project</h1>
-      <a href="#" class="text-xl">about</a>
-    </div>
-    <div class="flex-col px-8 mx-auto justify-center" style="max-width: 960px;">
-      <div class="text-center mb-8">
-        <h2 class="text-lg font-bold text-gray-100">
+      <div class="text-center mb-4 px-2 md:px-0">
+        <h2 class="text-2xl font-bold text-gray-100">
           Thank you, {{ recipientName }}!
         </h2>
-        <h3 class="text-2xl leading-tight text-gray-200">
+        <h3 class="text-3xl leading-tight text-gray-200">
           You had a meaningful impact.
           <br />
           {{ beneficiaryName }} wants to tell you about it.
@@ -19,7 +17,7 @@
       </div>
 
       <div
-        class="flex relative justify-center mb-8"
+        class="flex relative justify-center mb-4"
         style="padding-top: 56.25%;"
       >
         <iframe
@@ -31,7 +29,7 @@
         ></iframe>
       </div>
 
-      <div class="text-enter mb-8 text-center">
+      <div class="text-enter mb-4 text-center px-2 md:px-0">
         It makes a big difference to have you as part of our community. Want to
         have more impact?
         <span v-if="callsToAction.length === 1">
@@ -45,7 +43,7 @@
         </span>
       </div>
 
-      <div class="flex justify-center">
+      <div class="flex flex-wrap justify-center px-2 md:px-0">
         <div
           v-for="(cta, index) in callsToAction"
           :key="index"
@@ -66,8 +64,13 @@
 </template>
 
 <script>
+import NavBar from "@/components/NavBar.vue";
+
 export default {
   name: "home",
+  components: {
+    NavBar
+  },
   data() {
     return {
       recipientName: "Margie",
@@ -86,6 +89,13 @@ export default {
         },
         {
           buttonText: "Advocate",
+          description:
+            "Advocate for issues concerning MCC Toronto, including LGBTQ and refugee rights.",
+          type: "LINK",
+          url: "https://google.ca"
+        },
+        {
+          buttonText: "Donate",
           description:
             "Advocate for issues concerning MCC Toronto, including LGBTQ and refugee rights.",
           type: "LINK",
