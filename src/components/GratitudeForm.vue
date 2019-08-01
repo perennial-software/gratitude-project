@@ -134,7 +134,7 @@
 
 <script>
 export default {
-  name: "CreateForm",
+  name: "GratitudeForm",
   model: {
     prop: "gratitude"
   },

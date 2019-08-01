@@ -58,6 +58,7 @@
 </template>
 <script>
 export default {
+  name: "GratitudeDetail",
   props: {
     gratitude: {
       type: Object,

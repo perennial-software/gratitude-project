@@ -1,19 +1,19 @@
 <template>
   <div>
     <nav-bar about />
-    <gratitude-message :gratitude="gratitude" />
+    <gratitude-detail :gratitude="gratitude" />
   </div>
 </template>
 
 <script>
 import NavBar from "@/components/NavBar.vue";
-import GratitudeMessage from "@/components/GratitudeMessage.vue";
+import GratitudeDetail from "@/components/GratitudeDetail.vue";
 
 export default {
   name: "home",
   components: {
     NavBar,
-    GratitudeMessage
+    GratitudeDetail
   },
   data() {
     return {
