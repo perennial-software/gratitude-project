@@ -6,25 +6,25 @@
     </h2>
     <div class="mb-4 flex flex-wrap justify-left">
       <span class="inline-block mb-4 pr-0 md:pr-4 w-full md:w-1/3">
-        <div class="pl-6 mb-2">Organization Name</div>
+        <div class="pl-6 mb-2">Beneficiary Name</div>
         <input
           type="text"
           class="w-full border-2 border-white bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
-          :value="gratitude.organizationName"
-          @input="updateOrganizationName($event.target.value)"
+          :value="gratitude.beneficiaryName"
+          @input="updateBeneficiaryName($event.target.value)"
         />
       </span>
       <span class="inline-block mb-4 pr-0 md:pr-4 w-full md:w-1/3">
-        <div class="pl-6 mb-2">Primary Contact Name</div>
+        <div class="pl-6 mb-2">Recipient Name</div>
         <input
           type="text"
           class="w-full border-2 border-white bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
-          :value="gratitude.primaryContactName"
-          @input="updatePrimaryContactName($event.target.value)"
+          :value="gratitude.recipientName"
+          @input="updateRecipientName($event.target.value)"
         />
       </span>
       <span class="inline-block mb-4 pr-0 md:pr-4 w-full md:w-1/3">
-        <div class="pl-6 mb-2">Email</div>
+        <div class="pl-6 mb-2">Recipient Email</div>
         <input
           type="text"
           class="w-full border-2 border-white bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
@@ -117,12 +117,12 @@
       </div>
     </div>
     <div class="w-full text-center md:text-right mb-8">
-      <button
-        class="w-full md:w-auto mr-0 md:mr-4 mb-4 md:mb-0 bg-gray-100 text-white text-xl py-4 px-16 rounded-full shadow-lg"
-        style="background: rgba(255, 255, 255, 0.1)"
-      >
-        Preview
-      </button>
+      <!-- <button -->
+      <!--   class="w-full md:w-auto mr-0 md:mr-4 mb-4 md:mb-0 bg-gray-100 text-white text-xl py-4 px-16 rounded-full shadow-lg" -->
+      <!--   style="background: rgba(255, 255, 255, 0.1)" -->
+      <!-- > -->
+      <!--   Preview -->
+      <!-- </button> -->
       <button
         class="w-full md:w-auto bg-gray-100 text-blue-800 text-xl py-4 px-16 rounded-full shadow-lg"
       >
@@ -150,6 +150,18 @@ export default {
     };
   },
   methods: {
+    updateBeneficiaryName(beneficiaryName) {
+      this.$emit("input", {
+        ...this.gratitude,
+        beneficiaryName
+      });
+    },
+    updateRecipientName(recipientName) {
+      this.$emit("input", {
+        ...this.gratitude,
+        recipientName
+      });
+    },
     updateOrganizationName(organizationName) {
       this.$emit("input", {
         ...this.gratitude,

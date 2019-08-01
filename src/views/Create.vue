@@ -21,8 +21,8 @@ export default {
   data() {
     return {
       gratitude: {
-        organizationName: "",
-        primaryContactName: "",
+        beneficiaryName: "",
+        recipientName: "",
         email: "",
         videoUrl: "",
         callsToAction: [...Array(3)].map(() => ({
