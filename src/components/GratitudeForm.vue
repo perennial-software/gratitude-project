@@ -180,10 +180,10 @@ export default {
         email
       });
     },
-    updateVideoUrl(vidoeUrl) {
+    updateVideoUrl(videoUrl) {
       this.$emit("input", {
         ...this.gratitude,
-        vidoeUrl
+        videoUrl
       });
     },
     updateCtaName(index, name) {
