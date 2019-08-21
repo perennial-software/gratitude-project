@@ -29,9 +29,10 @@ exports.gratitudeMessage = (req, res) => {
 
   // GET an existing gratitude message
   if (req.method === "GET") {
+    const messsageid = req.query.messsageid.replace(/[^a-zA-Z0-9]/g, '').trim();
     return firestore
       .collection(GRATITUDE_MESSAGE_COLLECTION)
-      .doc(id)
+      .doc(messsageid)
       .get()
       .then(doc => {
         if (!(doc && doc.exists)) {
