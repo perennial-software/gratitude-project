@@ -1,0 +1,22 @@
+{
+  "name": "cloud-functions",
+  "version": "1.0.0",
+  "description": "Functions to be deployed in GCP for serverless execution",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/perennial-software/gratitude-project.git"
+  },
+  "author": "Adam El-Masri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/perennial-software/gratitude-project/issues"
+  },
+  "homepage": "https://github.com/perennial-software/gratitude-project#readme",
+  "dependencies": {
+    "@google-cloud/firestore": "2.2.7"
+  }
+}
