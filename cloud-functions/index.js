@@ -16,7 +16,7 @@ exports.gratitudeMessage = (req, res) => {
       .then(doc => {
         // generate email
         // send email
-        return res.status(200).send(doc);
+        return res.status(200).send(doc.getId());
       })
       .catch(err => {
         console.error(err);
@@ -29,7 +29,8 @@ exports.gratitudeMessage = (req, res) => {
 
   // GET an existing gratitude message
   if (req.method === "GET") {
-    const messsageid = req.query.messsageid.replace(/[^a-zA-Z0-9]/g, '').trim();
+    console.log(req.query)
+    const messsageid = req.query.messageid.replace(/[^a-zA-Z0-9]/g, '').trim();
     return firestore
       .collection(GRATITUDE_MESSAGE_COLLECTION)
       .doc(messsageid)
