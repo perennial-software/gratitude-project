@@ -17,7 +17,7 @@ export default {
   },
   getGratitudeMessage(messageId) {
     return axios
-      .get(`/api/gratitudeMessage?messageId=${messageId}`)
+      .get(`/api/gratitudeMessage?messageid=${messageId}`)
       .then(response => response.body);
   }
 };
