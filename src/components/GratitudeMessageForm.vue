@@ -51,7 +51,7 @@
     </h2>
     <div class="mb-8">
       <span class="flex flex-wrap items-baseline">
-        <span class="w-full md:w-auto">
+        <span class="w-full md:w-auto flex-grow">
           <span class="w-full inline-block">
             <div class="pl-6 mb-2">Video Link</div>
             <input
@@ -60,6 +60,7 @@
               class="cta-input form-input w-full border-2 bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
               :value="gratitudeMessage.videoUrl"
               @input="updateVideoUrl($event.target.value)"
+              :disabled="isUploaded"
             />
           </span>
         </span>
@@ -68,11 +69,19 @@
           >or</span
         >
         <span class="w-full md:w-auto">
-          <button
+          <!-- <button -->
+          <!--   class="w-full bg-gray-100 hover:bg-gray-200 border-2 border-white text-blue-800 py-3 px-6 rounded-full shadow" -->
+          <!-- > -->
+          <!--   Upload from device -->
+          <!-- </button> -->
+          <input
             class="w-full bg-gray-100 hover:bg-gray-200 border-2 border-white text-blue-800 py-3 px-6 rounded-full shadow"
-          >
-            Upload from device
-          </button>
+            type="file"
+            id="file"
+            ref="file"
+            v-on:change="uploadVideo()"
+            :disabled="isUploading || isUploaded"
+          />
         </span>
       </span>
     </div>
@@ -152,6 +161,8 @@
 </template>
 
 <script>
+import Vimeo from "@/services/vimeo";
+
 export default {
   name: "GratitudeMessageForm",
   model: {
@@ -166,6 +177,8 @@ export default {
   data() {
     return {
       descriptionMaxLength: 85,
+      isUploading: false,
+      isUploaded: false,
       errors: []
     };
   },
@@ -244,6 +257,38 @@ export default {
         ...this.gratitudeMessage,
         callsToAction
       });
+    },
+    uploadVideo() {
+      this.isUploading = true;
+
+      let file_name = this.$refs.file.files[0];
+
+      let client = new Vimeo(
+        "5eae5ebb7bcd5ef29fd7df5c43a05ac66f9c9ce8",
+        "XY45SWIYxKK6CNuTjfI5eHyybgqgLC47gnDikMHK/l20TI+M17lNQrnJUeK2Zbo+PEFCGILMAOF4gzXvPnVSFtM3VI46k6mFVyAIO2seuk1QfVe3I7Gv2AVQWbUm1dLY",
+        "c0a6f79e7bae63b885083950efb3adff"
+      );
+
+      client.upload(
+        file_name,
+        {
+          name: "The Gratitude Project",
+          description: "Thank You!"
+        },
+        uri => {
+          this.isUploaded = true;
+          console.log("Your video URI is: " + uri);
+          this.gratitudeMessage.videoUrl = `https://player.vimeo.com${uri}`
+        },
+        (bytes_uploaded, bytes_total) => {
+          var percentage = ((bytes_uploaded / bytes_total) * 100).toFixed(2);
+          console.log(bytes_uploaded, bytes_total, percentage + "%");
+        },
+        error => {
+          this.isUploading = false;
+          console.log("Failed because: " + error);
+        }
+      );
     },
     submit(gratitudeMessage) {
       this.errors = [];
