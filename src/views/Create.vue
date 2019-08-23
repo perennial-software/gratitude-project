@@ -5,33 +5,48 @@
       class="w-full px-4 md:px-8 mx-auto justify-center mt-8"
       style="max-width: 960px;"
     >
-      <gratitude-form v-model="gratitude" />
+      <gratitude-message-form v-model="gratitudeMessage" @submit="submit" />
     </div>
   </div>
 </template>
 <script>
+import api from "@/api";
+
 import NavBar from "@/components/NavBar.vue";
-import GratitudeForm from "@/components/GratitudeForm.vue";
+import GratitudeMessageForm from "@/components/GratitudeMessageForm.vue";
 
 export default {
   components: {
     NavBar,
-    GratitudeForm
+    GratitudeMessageForm
   },
   data() {
     return {
-      gratitude: {
+      vimeoCredentials: null,
+      gratitudeMessage: {
         beneficiaryName: "",
         recipientName: "",
-        email: "",
+        recipientEmail: "",
         videoUrl: "",
         callsToAction: [...Array(3)].map(() => ({
-          name: "",
-          link: "",
-          description: ""
+          buttonText: "",
+          description: "",
+          link: ""
         }))
       }
     };
+  },
+  mounted() {
+    this.$api.getVimeoCredentials().then(vimeoCredentials => {
+      this.vimeoCredentials = vimeoCredentials;
+    });
+  },
+  methods: {
+    submit(gratitudeMessage) {
+      this.$api.postGratitudeMessage(gratitudeMessage).then(message => {
+        this.$router.push({ name: "item", params: { id: message.id } });
+      });
+    }
   }
 };
 </script>
