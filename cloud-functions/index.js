@@ -16,7 +16,7 @@ exports.gratitudeMessage = (req, res) => {
       .then(doc => {
         // generate email
         // send email
-        return res.status(200).send(doc.getId());
+        return res.status(200).send(doc.id);
       })
       .catch(err => {
         console.error(err);
