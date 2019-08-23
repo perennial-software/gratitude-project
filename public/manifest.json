@@ -1,6 +1,6 @@
 {
-  "name": "gratitude-project",
-  "short_name": "gratitude-project",
+  "name": "Gratitude Project",
+  "short_name": "Gratitude Project",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
@@ -15,6 +15,6 @@
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#4DBA87"
+  "background_color": "#34a7ff",
+  "theme_color": "#34a7ff"
 }
