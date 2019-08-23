@@ -6,7 +6,13 @@ import "./registerServiceWorker";
 
 import "@/assets/css/tailwind.css";
 
+import gtag from "./plugins/gtag";
+import api from "./plugins/api";
+
 Vue.config.productionTip = false;
+
+Vue.use(gtag);
+Vue.use(api);
 
 new Vue({
   router,
