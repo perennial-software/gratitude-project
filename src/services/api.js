@@ -13,11 +13,11 @@ export default {
   postGratitudeMessage(gratitudeMessage) {
     return axios
       .post("/api/gratitudeMessage", gratitudeMessage)
-      .then(response => ({ id: response.body.id }));
+      .then(response => ({ id: response.data }));
   },
   getGratitudeMessage(messageId) {
     return axios
       .get(`/api/gratitudeMessage?messageid=${messageId}`)
-      .then(response => response.body);
+      .then(response => response.data);
   }
 };
