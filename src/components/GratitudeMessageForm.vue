@@ -278,7 +278,7 @@ export default {
         uri => {
           this.isUploaded = true;
           console.log("Your video URI is: " + uri);
-          this.gratitudeMessage.videoUrl = `https://player.vimeo.com${uri}`
+          this.gratitudeMessage.videoUrl = `https://player.vimeo.com${uri}`;
         },
         (bytes_uploaded, bytes_total) => {
           var percentage = ((bytes_uploaded / bytes_total) * 100).toFixed(2);
