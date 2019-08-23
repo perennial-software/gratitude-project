@@ -1,2 +1,2 @@
+/api/*   https://us-central1-fast-synapse-246815.cloudfunctions.net/:splat 200
 /*   /index.html   200
-/api/*   https://us-central1-fast-synapse-246815.cloudfunctions.net/:splat
