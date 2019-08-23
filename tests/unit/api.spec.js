@@ -1,5 +1,5 @@
 import axios from "axios";
-import api from "@/api/api";
+import api from "@/services/api";
 
 jest.mock("axios");
 

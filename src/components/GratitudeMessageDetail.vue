@@ -46,6 +46,7 @@
       >
         <button
           class="cta-button py-8 px-16 mb-4 bg-blue-100 text-xl text-gray-800 shadow-xl rounded-full"
+          @click="onClick(cta)"
         >
           {{ cta.buttonText }}
         </button>
@@ -63,6 +64,11 @@ export default {
     gratitudeMessage: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    onClick(cta) {
+      window.location = cta.link
     }
   }
 };

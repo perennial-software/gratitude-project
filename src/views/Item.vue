@@ -9,8 +9,6 @@
 </template>
 
 <script>
-import api from "@/api";
-
 import NavBar from "@/components/NavBar.vue";
 import GratitudeMessageDetail from "@/components/GratitudeMessageDetail.vue";
 
