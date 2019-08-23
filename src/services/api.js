@@ -12,17 +12,12 @@ export default {
   },
   postGratitudeMessage(gratitudeMessage) {
     return axios
-      .post(
-        "https://us-central1-fast-synapse-246815.cloudfunctions.net/gratitudeMessage",
-        gratitudeMessage
-      )
+      .post("/api/gratitudeMessage", gratitudeMessage)
       .then(response => ({ id: response.body.id }));
   },
   getGratitudeMessage(messageId) {
     return axios
-      .get(
-        `https://us-central1-fast-synapse-246815.cloudfunctions.net/gratitudeMessage?messageId=${messageId}`
-      )
+      .get(`/api/gratitudeMessage?messageId=${messageId}`)
       .then(response => response.body);
   }
 };
