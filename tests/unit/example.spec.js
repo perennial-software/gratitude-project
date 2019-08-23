@@ -1,12 +1,17 @@
 import { shallowMount } from "@vue/test-utils";
-import HelloWorld from "@/components/HelloWorld.vue";
+import GratitudeMessageForm from "@/components/GratitudeMessageForm.vue";
 
-describe("HelloWorld.vue", () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg }
+describe("GratitudeMessageForm.vue", () => {
+  it("renders props.gratitudeMessage when passed", () => {
+    const gratitudeMessage = {
+      beneficiaryName: "Alice",
+      recipientName: "Bob",
+      recipientEmail: "bob@example.com"
+    };
+    const wrapper = shallowMount(GratitudeMessageForm, {
+      propsData: { gratitudeMessage }
     });
-    expect(wrapper.text()).toMatch(msg);
+    wrapper.vm.$emit("submit");
+    expect(wrapper.emitted().submit).toBeTruthy();
   });
 });
