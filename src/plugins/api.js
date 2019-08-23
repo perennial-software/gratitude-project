@@ -1,5 +1,5 @@
-import api from "@/api/api";
-import fake_api from "@/api/api.fake";
+import api from "@/services/api";
+import fake_api from "@/services/api.fake";
 
 export default {
   install(Vue) {
