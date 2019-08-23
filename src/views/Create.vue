@@ -20,7 +20,6 @@ export default {
   },
   data() {
     return {
-      vimeoCredentials: null,
       gratitudeMessage: {
         beneficiaryName: "",
         recipientName: "",
@@ -33,11 +32,6 @@ export default {
         }))
       }
     };
-  },
-  mounted() {
-    this.$api.getVimeoCredentials().then(vimeoCredentials => {
-      this.vimeoCredentials = vimeoCredentials;
-    });
   },
   methods: {
     submit(gratitudeMessage) {
