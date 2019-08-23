@@ -38,26 +38,33 @@
     </h2>
     <div class="mb-8">
       <span class="flex flex-wrap items-baseline">
-        <span class="w-full md:w-auto">
-          <span class="w-full inline-block">
-            <div class="pl-6 mb-2">Link</div>
-            <input
-              type="text"
-              class="w-full border-2 border-white bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
-              :value="gratitude.videoUrl"
-              @input="updateVideoUrl($event.target.value)"
-            />
-          </span>
+        <span class="w-full md:w-auto inline-block">
+          <div class="pl-6 mb-2">Link</div>
+          <input
+            type="text"
+            class="w-full border-2 border-white bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
+            :value="gratitude.videoUrl"
+          />
         </span>
         <span
-          class="w-full md:w-auto mx-4 text-lg text-center font-bold md:font-normal my-4 md:my-0"
-          >or</span
-        >
-        <span class="w-full md:w-auto">
+          class="w-full inline-block md:w-auto mx-4 text-lg text-center font-bold md:font-normal my-4 md:my-0"
+          >or
+        </span>
+        <span class="w-full inline-block">
+          <div class="pl-6 mb-2">Upload from Device</div>
+          <input
+            class="bg-gray-100 text-blue-800 py-3 px-6 rounded-full shadow"
+            type="file"
+            id="file"
+            ref="file"
+            v-on:change="handleFileUpload()"
+            :value="gratitude.videoUrl"
+          />
           <button
-            class="w-full bg-gray-100 text-blue-800 py-3 px-6 rounded-full shadow"
+            class="md:w-auto flex-col  px-8 py-4 rounded-lg text-left"
+            v-on:click="submitLocalFile()"
           >
-            Upload from device
+            Upload
           </button>
         </span>
       </span>
@@ -131,7 +138,6 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   name: "GratitudeForm",
@@ -146,7 +152,10 @@ export default {
   },
   data() {
     return {
-      descriptionMaxLength: 85
+      descriptionMaxLength: 85,
+      file: "",
+      uri: "",
+      url: ""
     };
   },
   methods: {
@@ -225,6 +234,35 @@ export default {
         ...this.gratitude,
         callsToAction
       });
+    },
+    submitLocalFile() {
+      let Vimeo = require("vimeo").Vimeo;
+      let client = new Vimeo(
+        "5eae5ebb7bcd5ef29fd7df5c43a05ac66f9c9ce8",
+        "XY45SWIYxKK6CNuTjfI5eHyybgqgLC47gnDikMHK/l20TI+M17lNQrnJUeK2Zbo+PEFCGILMAOF4gzXvPnVSFtM3VI46k6mFVyAIO2seuk1QfVe3I7Gv2AVQWbUm1dLY",
+        "c0a6f79e7bae63b885083950efb3adff"
+      );
+      let file_name = this.file;
+      client.upload(
+        file_name,
+        {
+          name: "The Gratitude Project",
+          description: "Thank You!"
+        },
+        function(uri) {
+          console.log("Your video URI is: " + uri);
+        },
+        function(bytes_uploaded, bytes_total) {
+          var percentage = ((bytes_uploaded / bytes_total) * 100).toFixed(2);
+          console.log(bytes_uploaded, bytes_total, percentage + "%");
+        },
+        function(error) {
+          console.log("Failed because: " + error);
+        }
+      );
+    },
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
     }
   }
 };
