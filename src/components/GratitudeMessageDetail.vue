@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     onClick(cta) {
-      window.location = cta.link;
+      window.open(cta, "_blank");
     }
   }
 };
