@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     onClick(cta) {
-      window.open(cta, "_blank");
+      window.open(cta.link, "_blank");
     }
   }
 };
