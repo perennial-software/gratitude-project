@@ -46,7 +46,7 @@
       >
         <button
           class="cta-button py-8 px-16 mb-4 bg-blue-100 text-xl text-gray-800 shadow-xl rounded-full"
-          @click="onClick(cta)"
+          @click="onClick(cta, index)"
         >
           {{ cta.buttonText }}
         </button>
@@ -67,7 +67,15 @@ export default {
     }
   },
   methods: {
-    onClick(cta) {
+    onClick(cta, index) {
+      this.$gtag("event", "cta_click", {
+        message_id: this.gratitudeMessage.id,
+        cta_index: index,
+        cta_name: cta.buttonText,
+        cta_description: cta.description,
+        cta_link: cta.link
+      });
+
       window.open(cta.link, "_blank");
     }
   }

@@ -1,11 +1,12 @@
 function fake_gtag() {
-  let output = "GTAG: ";
+  let output = "gtag(";
   for (var i = 0; i < arguments.length; i++) {
-    output += `${arguments[i]}`;
+    output += JSON.stringify(arguments[i]);
     if (i + 1 !== arguments.length) {
       output += ", ";
     }
   }
+  output += ")";
   console.log(output);
 }
 

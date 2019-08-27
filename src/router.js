@@ -13,17 +13,17 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",
+      name: "Home",
       component: Home
     },
     {
       path: "/create",
-      name: "create",
+      name: "Create",
       component: Create
     },
     {
       path: "/g/:id",
-      name: "item",
+      name: "Item",
       props: true,
       component: Item
     },

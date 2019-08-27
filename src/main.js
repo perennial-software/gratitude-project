@@ -14,6 +14,11 @@ Vue.config.productionTip = false;
 Vue.use(gtag);
 Vue.use(api);
 
+router.beforeEach((to, from, next) => {
+  router.app.$gtag("event", "screen_view", to.name);
+  next();
+});
+
 new Vue({
   router,
   store,

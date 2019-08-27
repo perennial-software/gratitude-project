@@ -36,7 +36,8 @@ export default {
   methods: {
     submit(gratitudeMessage) {
       this.$api.postGratitudeMessage(gratitudeMessage).then(message => {
-        this.$router.push({ name: "item", params: { id: message.id } });
+        this.$gtag("event", "create_message", { message_id: message.id });
+        this.$router.push({ name: "Item", params: { id: message.id } });
       });
     }
   }
