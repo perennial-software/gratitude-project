@@ -12,7 +12,7 @@ const FakeVimeo = function(accesToken, key, secret) {
   return this;
 };
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.VUE_APP_FAKE_VIMEO === "true") {
   Vimeo = FakeVimeo;
 }
 

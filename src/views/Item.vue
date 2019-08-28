@@ -25,6 +25,11 @@ export default {
     GratitudeMessageDetail
   },
   mounted() {
+    this.$gtag("event", "view_message", {
+      event_category: "gratitude_message",
+      event_label: `${this.id}`
+    });
+
     this.loadGratitudeMessage(this.id);
   },
   watch: {

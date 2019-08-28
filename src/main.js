@@ -15,7 +15,10 @@ Vue.use(gtag);
 Vue.use(api);
 
 router.beforeEach((to, from, next) => {
-  router.app.$gtag("event", "screen_view", to.name);
+  router.app.$gtag("event", "screen_view", {
+    app_name: "GratitudeProject",
+    screen_name: to.name
+  });
   next();
 });
 

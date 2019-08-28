@@ -68,12 +68,10 @@ export default {
   },
   methods: {
     onClick(cta, index) {
-      this.$gtag("event", "cta_click", {
-        message_id: this.gratitudeMessage.id,
-        cta_index: index,
-        cta_name: cta.buttonText,
-        cta_description: cta.description,
-        cta_link: cta.link
+      this.$gtag("event", "click_message_call_to_action", {
+        event_category: "gratitude_message",
+        event_label: `${this.gratitudeMessage.id}`,
+        value: index
       });
 
       window.open(cta.link, "_blank");

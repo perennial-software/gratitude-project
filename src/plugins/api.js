@@ -4,6 +4,6 @@ import fake_api from "@/services/api.fake";
 export default {
   install(Vue) {
     Vue.prototype.$api =
-      process.env.NODE_ENV === "development" ? fake_api : api;
+      process.env.VUE_APP_FAKE_API === "true" ? fake_api : api;
   }
 };

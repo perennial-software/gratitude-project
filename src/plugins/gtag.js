@@ -13,6 +13,6 @@ function fake_gtag() {
 export default {
   install(Vue) {
     Vue.prototype.$gtag =
-      process.env.NODE_ENV === "development" ? fake_gtag : window.gtag;
+      process.env.VUE_APP_FAKE_GTAG === "true" ? fake_gtag : window.gtag;
   }
 };
