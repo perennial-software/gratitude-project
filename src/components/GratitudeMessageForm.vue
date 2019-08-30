@@ -59,7 +59,7 @@
             <label for="video-link" class="pl-6 mb-2">Video Link</label>
             <input
               type="text"
-              video-link="video-link"
+              id="video-link"
               data-cy="video-link"
               class="cta-input form-input w-full border-2 bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
               :value="gratitudeMessage.videoUrl"
