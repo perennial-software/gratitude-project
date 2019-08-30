@@ -14,11 +14,12 @@
     </h2>
     <div class="mb-4 flex flex-wrap justify-left">
       <span class="inline-block mb-4 pr-0 md:pr-4 w-full md:w-1/3">
-        <div class="pl-6 mb-2">
+        <label for="beneficiary-name" class="pl-6">
           Beneficiary Name
-        </div>
+        </label>
         <input
           type="text"
+          id="beneficiary-name"
           data-cy="beneficiary-name"
           class="cta-input form-input w-full border-2 bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
           :value="gratitudeMessage.beneficiaryName"
@@ -26,9 +27,10 @@
         />
       </span>
       <span class="inline-block mb-4 pr-0 md:pr-4 w-full md:w-1/3">
-        <div class="pl-6 mb-2">Recipient Name</div>
+        <label for="recipient-name" class="pl-6">Recipient Name</label>
         <input
           type="text"
+          id="recipient-name"
           data-cy="recipient-name"
           class="cta-input form-input w-full border-2 bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
           :value="gratitudeMessage.recipientName"
@@ -36,9 +38,10 @@
         />
       </span>
       <span class="inline-block mb-4 pr-0 md:pr-4 w-full md:w-1/3">
-        <div class="pl-6 mb-2">Recipient Email</div>
+        <label for="recipient-email" class="pl-6">Recipient Email</label>
         <input
           type="text"
+          id="recipient-email"
           data-cy="recipient-email"
           class="cta-input form-input w-full border-2 bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
           :value="gratitudeMessage.recipientEmail"
@@ -53,9 +56,10 @@
       <span class="flex flex-wrap items-baseline">
         <span class="w-full md:w-auto flex-grow">
           <span class="w-full inline-block">
-            <div class="pl-6 mb-2">Video Link</div>
+            <label for="video-link" class="pl-6 mb-2">Video Link</label>
             <input
               type="text"
+              video-link="video-link"
               data-cy="video-link"
               class="cta-input form-input w-full border-2 bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
               :value="gratitudeMessage.videoUrl"
@@ -75,10 +79,11 @@
           <!--   Upload from device -->
           <!-- </button> -->
           <input
-            class="w-full bg-gray-100 hover:bg-gray-200 border-2 border-white text-blue-800 py-3 px-6 rounded-full shadow"
+            class="w-full bg-gray-100 hover:bg-gray-200 border-2 border-white text-blue-800 py-2 px-6 rounded-full shadow"
             type="file"
             id="file"
             ref="file"
+            aria-label="Upload to Vimeo"
             v-on:change="uploadVideo()"
             :disabled="isUploading || isUploaded"
           />
@@ -104,7 +109,9 @@
         <div class="w-full md:w-64 pr-0 md:pr-2 py-3">
           <input
             type="text"
+            :id="`cta-button-text-${i}`"
             data-cy="cta-button-text"
+            :aria-label="`Title ${i + 1}`"
             :placeholder="`Title ${i + 1}`"
             class="cta-input form-input w-full bg-transparent border-b-2 font-bold text-2xl outline-none pb-2 leading-none"
             :value="cta.buttonText"
@@ -115,6 +122,7 @@
           <input
             type="text"
             data-cy="cta-link"
+            aria-label="Link or Email Address"
             placeholder="Link or Email Address"
             class="cta-input form-input w-full bg-transparent border-b-2 font-bold outline-none pb-2 leading-none"
             :value="cta.link"
@@ -126,6 +134,7 @@
             rows="3"
             type="text"
             data-cy="cta-description"
+            aria-label="CTA Description (optional)"
             placeholder="CTA Description (optional)"
             class="form-textarea flex-auto bg-transparent font-bold outline-none"
             :value="cta.description"
