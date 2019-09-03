@@ -26,11 +26,11 @@
           <br />
           Email:
           <a
-            href="mailto:ben@better.place"
+            href="mailto:ben@gratitudeproject.ca"
             target="_top"
             class="font-bold underline"
           >
-            ben@better.place
+            ben@gratitudeproject.ca
           </a>
         </p>
       </div>
