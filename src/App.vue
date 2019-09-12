@@ -15,6 +15,7 @@ body {
   background: linear-gradient(to bottom right, #34a7ff 55%, #45cafd);
   background-attachment: fixed;
   background-repeat: no-repeat;
+  min-height: 100vh;
 }
 button {
   outline: none !important;
