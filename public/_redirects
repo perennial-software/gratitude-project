@@ -1,2 +1,3 @@
 /api/*   https://us-central1-fast-synapse-246815.cloudfunctions.net/:splat 200
+/gtag/*   https://www.googletagmanager.com/gtag/:splat 200
 /*   /index.html   200
