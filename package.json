@@ -18,10 +18,13 @@
   },
   "homepage": "https://github.com/jasonkclee/gratitude-project#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "config": "^3.2.4",
     "express": "^4.17.1",
-    "mongoose": "^5.7.8"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.8",
+    "validator": "^12.0.0"
   },
   "devDependencies": {
     "concurrently": "^5.0.0",
