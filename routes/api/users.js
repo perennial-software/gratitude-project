@@ -57,6 +57,12 @@ router.post("/login", (req, res) => {
 });
 
 //ROBERT YOU NEED TO ADD FUNCTIONALITY TO THIS FUNCTION TO ENSURE REGISTRATION WORKS
+// You need to validate whatever input is passed in the request body. It has to be a valid
+// email and password must be of atleast 6 characters in length
+// Then check if the email exists in the DB. If it does not exist, then create a new user
+// make sure the password you store in the db is encrypted using bcrypt as i have done in the login
+// route
+
 //  @route GET api/users/register
 //  @desc Register User
 //  @access Public
