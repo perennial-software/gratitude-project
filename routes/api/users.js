@@ -5,6 +5,7 @@ const signToken = require("../../utils/signJWT");
 
 //load input validation
 const validateLoginInput = require("../../validation/login");
+const validateRegisterInput = require("../../validation/register");
 
 //Load user model
 const User = require("../../models/User");
@@ -56,18 +57,47 @@ router.post("/login", (req, res) => {
     });
 });
 
-//ROBERT YOU NEED TO ADD FUNCTIONALITY TO THIS FUNCTION TO ENSURE REGISTRATION WORKS
-// You need to validate whatever input is passed in the request body. It has to be a valid
-// email and password must be of atleast 6 characters in length
-// Then check if the email exists in the DB. If it does not exist, then create a new user
-// make sure the password you store in the db is encrypted using bcrypt as i have done in the login
-// route
-
 //  @route GET api/users/register
 //  @desc Register User
 //  @access Public
-router.get("/register", (req, res) => {
-  return res.json({ success: "Register Works" });
+router.post("/register", (req, res) => {
+  const { errors, isValid } = validateRegisterInput(req.body);
+
+  //Check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  User.findOne({ email: req.body.email }).then(user => {
+    if (user) {
+      errors.email = "Email already exists";
+      return res.status(400).json(errors);
+    } else {
+      const newUser = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
+      });
+
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if (err) {
+            throw err;
+          }
+          newUser.password = hash;
+          newUser
+            .save()
+            .then(user => {
+              return res.json(user);
+            })
+            .catch(err => {
+              console.log(err);
+              return res.status(500).json(err);
+            });
+        });
+      });
+    }
+  });
 });
 
 module.exports = router;
