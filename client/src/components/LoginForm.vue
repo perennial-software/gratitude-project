@@ -42,6 +42,8 @@
 </style>
 
 <script>
+    const axios = require('axios').default;
+    const login_end = 'http://localhost:5000/api/users/login'
     export default {
     name: "LoginForm",
     data() {
@@ -56,12 +58,25 @@
     methods: {
         login() {
             if (this.input.username != "" && this.input.password != "") {
-                var authenticated = true;
-                if (authenticated) {
+                //post username and password to server
+                console.log("entered");
+                axios.post(login_end, {
+                    email: this.input.username,
+                    password: this.input.password
+                })
+                .then(res => {
+                    console.log(res);
                     this.errorMsg = null;
-                } else {
-                    this.errorMsg = "*Error: The username and / or password is incorrect";
-                }
+                    if (window.localStorage) {
+                        //localStorage.setItem('token', res.token);
+                        //console.log(localStorage.getItem('token'));
+                    } else {
+                        //if the browser does not support local storage, we print an error
+                    }})
+                .catch(err => {
+                    console.log(err);
+                    this.errorMsg = "*Error: The username and / or password is incorrect"
+                });
             } else {
                 this.errorMsg = "*Error: A username and password must be present";
             }
