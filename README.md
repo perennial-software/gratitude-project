@@ -20,7 +20,7 @@ npm run server
 npm run dev
 ```
 
-## Vue Project setup (In a different tab in which the Express Server is running.)
+## Vue Project setup (In a different tab where the Express Server is not running.)
 
 ### Go into client directory
 
