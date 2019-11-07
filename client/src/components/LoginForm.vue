@@ -42,6 +42,9 @@
 </style>
 
 <script>
+    import Vue from 'vue';
+    import VueRouter from 'vue-router';
+    Vue.use(VueRouter);
     const axios = require('axios').default;
     const login_end = 'http://localhost:5000/api/users/login';
     const jwt = require("jsonwebtoken");
@@ -58,6 +61,7 @@
     },
     methods: {
         login() {
+            var self = this;
             if (localStorage.getItem('token')) {
                 this.errorMsg = "*User already logged in";
             } else if (this.input.username != "" && this.input.password != "") {
@@ -77,6 +81,7 @@
                         localStorage.setItem('id', decoded.id);
                         localStorage.setItem('name', decoded.name);
                         console.log(localStorage.getItem('name'));
+                        self.$router.push('/create');
                     } else {
                         //if the browser does not support local storage, we print an error
                     }})
