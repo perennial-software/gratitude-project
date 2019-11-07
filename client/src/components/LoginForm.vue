@@ -25,19 +25,18 @@
         Login
       </button>
     </form>
-    <span class="mt-3 errorMsg" v-if="errorMsg">{{ errorMsg }}</span>
+    <div class="mt-3 py-2 errorMsg" v-if="errorMsg">{{ errorMsg }}</div>
   </div>
 </template>
 
 <style>
     .loginForm {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        max-width: 500px;
+        max-width: 400px;
+        text-align: center;
     }
     .errorMsg {
         color: red;
+        text-align: center;
     }
 </style>
 
