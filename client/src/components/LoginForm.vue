@@ -46,8 +46,15 @@
     import VueRouter from 'vue-router';
     Vue.use(VueRouter);
     const axios = require('axios').default;
+    const lsCheck = require('./../LScheck')
     const login_end = 'http://localhost:5000/api/users/login';
     const jwt = require("jsonwebtoken");
+    // const router = new VueRouter();
+
+    if (lsCheck.hasStorage && localStorage.getItem('id')) {
+        //redirects to home page if user is signed in
+        // router.push('/create');
+    }
     export default {
     name: "LoginForm",
     data() {
@@ -62,9 +69,7 @@
     methods: {
         login() {
             var self = this;
-            if (localStorage.getItem('token')) {
-                this.errorMsg = "*User already logged in";
-            } else if (this.input.username != "" && this.input.password != "") {
+            if (this.input.username != "" && this.input.password != "") {
                 //post username and password to server
                 axios.post(login_end, {
                     email: this.input.username,
@@ -74,7 +79,7 @@
                     console.log(res);
                     this.errorMsg = null;
                     axios.defaults.headers.common['Authorization'] = res.data.token;
-                    if (window.localStorage) {
+                    if (lsCheck.hasStorage) {
                         console.log("enter local storage");
                         var decoded = jwt.decode(res.data.token.substring(7, res.data.token.length));
                         console.log(decoded);
@@ -82,8 +87,6 @@
                         localStorage.setItem('name', decoded.name);
                         console.log(localStorage.getItem('name'));
                         self.$router.push('/create');
-                    } else {
-                        //if the browser does not support local storage, we print an error
                     }})
                 .catch(err => {
                     console.log(err);
