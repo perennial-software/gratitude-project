@@ -15,7 +15,7 @@
         v-model="input.password"
         v-on:keyup.enter="login"
         placeholder="Password"
-        class="mt-3 cta-input form-input w-full border-2 bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
+        class="mt-3 cta-input form-input w-full border-2 rounded-full py-2 px-5 outline-none font-bold text-lg"
       />
       <button
         type="button"
