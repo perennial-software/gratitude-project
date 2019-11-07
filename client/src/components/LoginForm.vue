@@ -43,7 +43,8 @@
 
 <script>
     const axios = require('axios').default;
-    const login_end = 'http://localhost:5000/api/users/login'
+    const login_end = 'http://localhost:5000/api/users/login';
+    const jwt = require("jsonwebtoken");
     export default {
     name: "LoginForm",
     data() {
@@ -57,9 +58,10 @@
     },
     methods: {
         login() {
-            if (this.input.username != "" && this.input.password != "") {
+            if (localStorage.getItem('token')) {
+                this.errorMsg = "*User already logged in";
+            } else if (this.input.username != "" && this.input.password != "") {
                 //post username and password to server
-                console.log("entered");
                 axios.post(login_end, {
                     email: this.input.username,
                     password: this.input.password
@@ -67,9 +69,14 @@
                 .then(res => {
                     console.log(res);
                     this.errorMsg = null;
+                    axios.defaults.headers.common['Authorization'] = res.data.token;
                     if (window.localStorage) {
-                        //localStorage.setItem('token', res.token);
-                        //console.log(localStorage.getItem('token'));
+                        console.log("enter local storage");
+                        var decoded = jwt.decode(res.data.token.substring(7, res.data.token.length));
+                        console.log(decoded);
+                        localStorage.setItem('id', decoded.id);
+                        localStorage.setItem('name', decoded.name);
+                        console.log(localStorage.getItem('name'));
                     } else {
                         //if the browser does not support local storage, we print an error
                     }})
