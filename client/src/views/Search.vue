@@ -34,10 +34,21 @@
 
 <script>
 import NavBar from "@/components/NavBar.vue";
+import api from "@/services/api.js";
 
 export default {
   components: {
     NavBar
+  },
+  data() {
+    return {
+      messages: []
+    }
+  },
+  created() {
+    api.getGratitudeMessages().then(response => {
+      this.messages = response.data;
+    });
   }
 };
 </script>
