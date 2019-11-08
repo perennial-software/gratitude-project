@@ -52,10 +52,6 @@
     const jwt = require("jsonwebtoken");
     // const router = new VueRouter();
 
-    if (lsCheck.hasStorage && localStorage.getItem('token')) {
-        //redirects to home page if user is signed in
-        // router.push('/create');
-    }
     export default {
     name: "LoginForm",
     data() {
@@ -66,6 +62,13 @@
             },
             errorMsg: null
         };
+    },
+    mounted() {
+        if (lsCheck.hasStorage && localStorage.getItem('token')) {
+        //redirects to home page if user is signed in
+            console.log("user already signed in");
+            this.$router.push('/create');
+        }
     },
     methods: {
         login() {
