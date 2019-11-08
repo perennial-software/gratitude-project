@@ -6,7 +6,7 @@
     <span>
     <router-link v-if="about" :to="{ name: 'About' }" class="text-xl navItem">about</router-link>
     <span v-if="!hideLoginItem">
-    <router-link v-if="id" v-on:click.native="logout" :to="{ name: 'Login' }" class="navItem">Logout</router-link>
+    <span class="navItem text-xl" v-if="token" v-on:click="logout" >Logout</span>
     <router-link v-else :to="{ name: 'Login' }" class="navItem text-xl">Login</router-link>
     </span>
     </span>
@@ -15,11 +15,14 @@
 <style>
   .navItem{
     margin-left:10px;
+    cursor:pointer;
   }
 </style>
 <script>
 
-
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
 export default {
   name: "NavBar",
   props: {
@@ -36,13 +39,14 @@ export default {
   },
   data(){
     return {
-      id: localStorage.getItem("id")
+      token: localStorage.getItem("token")
     }
   },
   methods:{
-    logout: () =>{
-      localStorage.removeItem("id");
-      console.log("Deleted user from local storage");
+    logout(){
+      localStorage.removeItem("token");
+      console.log("Deleted token from local storage");
+      this.$router.push('/login');
     }
   }
 };
