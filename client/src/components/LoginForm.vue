@@ -44,9 +44,10 @@
 <script>
     import Vue from 'vue';
     import VueRouter from 'vue-router';
+    import store from './../store';
     Vue.use(VueRouter);
     const axios = require('axios').default;
-    const lsCheck = require('./../LScheck')
+    const lsCheck = require('./../LScheck');
     const login_end = 'http://localhost:5000/api/users/login';
     const jwt = require("jsonwebtoken");
     // const router = new VueRouter();
@@ -79,15 +80,14 @@
                 this.errorMsg = null;
                 axios.defaults.headers.common['Authorization'] = res.data.token;
                 if (lsCheck.hasStorage) {
-                    console.log("enter local storage");
                     var decoded = jwt.decode(res.data.token.substring(7, res.data.token.length));
-                    console.log(decoded);
                     localStorage.setItem('token', res.data.token);
-                    console.log(localStorage.getItem('token'));
+                    this.$store.commit('setNameId', decoded.name, decoded.id)
+                    console.log("the name in storage is " + this.$store.state.name);
                     self.$router.push('/create');
                 }})
             .catch(err => {
-                console.log(err.response);
+                console.log(err);
                 this.errorMsg = "*Error: "
                 if (err.response.data.email) {
                     this.errorMsg = this.errorMsg + err.response.data.email + "\n";
