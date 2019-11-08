@@ -65,9 +65,19 @@
     },
     mounted() {
         if (lsCheck.hasStorage && localStorage.getItem('token')) {
-        //redirects to home page if user is signed in
-            console.log("user already signed in");
-            this.$router.push('/create');
+            var token = localStorage.getItem('token');
+            try {
+                const exp_check = jwt.decode(token.substring(7, token.length));
+                if (Date.now() >= exp_check.exp * 1000) {
+                    localStorage.removeItem('token');
+                    throw "token expired"
+                }
+                //redirects to home page if token is valid
+                console.log("user already signed in");
+                this.$router.push('/create');
+            } catch (err) {
+                console.log(err)
+            }
         }
     },
     methods: {
@@ -79,7 +89,6 @@
                 password: this.input.password
             })
             .then(res => {
-                console.log(res);
                 this.errorMsg = null;
                 axios.defaults.headers.common['Authorization'] = res.data.token;
                 if (lsCheck.hasStorage) {
