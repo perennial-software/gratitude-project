@@ -15,7 +15,7 @@
         v-model="input.password"
         v-on:keyup.enter="login"
         placeholder="Password"
-        class="mt-3 cta-input form-input w-full border-2 rounded-full py-2 px-5 outline-none font-bold text-lg"
+        class="mt-3 cta-input form-input w-full border-2 bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
       />
       <button
         type="button"
@@ -37,6 +37,7 @@
     .errorMsg {
         color: red;
         text-align: center;
+        white-space: pre;
     }
 </style>
 
@@ -50,7 +51,7 @@
     const jwt = require("jsonwebtoken");
     // const router = new VueRouter();
 
-    if (lsCheck.hasStorage && localStorage.getItem('id')) {
+    if (lsCheck.hasStorage && localStorage.getItem('token')) {
         //redirects to home page if user is signed in
         // router.push('/create');
     }
@@ -68,33 +69,34 @@
     methods: {
         login() {
             var self = this;
-            if (this.input.username != "" && this.input.password != "") {
-                //post username and password to server
-                axios.post(login_end, {
-                    email: this.input.username,
-                    password: this.input.password
-                })
-                .then(res => {
-                    console.log(res);
-                    this.errorMsg = null;
-                    axios.defaults.headers.common['Authorization'] = res.data.token;
-                    if (lsCheck.hasStorage) {
-                        console.log("enter local storage");
-                        var decoded = jwt.decode(res.data.token.substring(7, res.data.token.length));
-                        console.log(decoded);
-                        localStorage.setItem('id', decoded.id);
-                        localStorage.setItem('name', decoded.name);
-                        console.log(localStorage.getItem('name'));
-                        self.$router.push('/create');
-                    }})
-                .catch(err => {
-                    console.log(err);
-                    this.errorMsg = "*Error: The username and / or password is incorrect"
-                });
-            } else {
-                this.errorMsg = "*Error: A username and password must be present";
-            }
+            //post username and password to server
+            axios.post(login_end, {
+                email: this.input.username,
+                password: this.input.password
+            })
+            .then(res => {
+                console.log(res);
+                this.errorMsg = null;
+                axios.defaults.headers.common['Authorization'] = res.data.token;
+                if (lsCheck.hasStorage) {
+                    console.log("enter local storage");
+                    var decoded = jwt.decode(res.data.token.substring(7, res.data.token.length));
+                    console.log(decoded);
+                    localStorage.setItem('token', res.data.token);
+                    console.log(localStorage.getItem('token'));
+                    self.$router.push('/create');
+                }})
+            .catch(err => {
+                console.log(err.response);
+                this.errorMsg = "*Error: "
+                if (err.response.data.email) {
+                    this.errorMsg = this.errorMsg + err.response.data.email + "\n";
+                }
+                if (err.response.data.password) {
+                    this.errorMsg += err.response.data.password;
+                }
+        });
         }
     }
-    };
+};
 </script>
