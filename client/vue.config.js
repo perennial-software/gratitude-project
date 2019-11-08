@@ -1,10 +1,13 @@
 module.exports = {
-  devServer: {
-    proxy: {
+  "devServer": {
+    "proxy": {
       "/gtag": {
-        target: "https://www.googletagmanager.com/",
-        changeOrigin: true
+        "target": "https://www.googletagmanager.com/",
+        "changeOrigin": true
       }
     }
-  }
-};
+  },
+  "transpileDependencies": [
+    "vuetify"
+  ]
+}
