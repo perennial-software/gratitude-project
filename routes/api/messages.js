@@ -26,7 +26,7 @@ let catch1 = router.post("/login", (req, res) => {
   const beneficiaryName = req.body.beneficiaryName;
 
   //Find message by recipient
-  Message.findOne({ beneficiaryName: recipientName })
+  Message.findOne({ recipientName: recipientName })
       .then(message => {
         const token = signToken(Message);
         res.status(200).json({ token: "Bearer " + token });
