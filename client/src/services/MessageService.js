@@ -6,17 +6,17 @@ const apiClient = axios.create({
 });
 export default {
   getMessages() {
-    axios.defaults.headers.common['Authorization'] = res.data.token;
-    lst_messages = [];
-    axios.get(baseURL + "/messages")
-    .then((response) => {
-      for(let i = 0; i < response.data["messages"].length; i++){
-        lst.messages.push(response.data["messages"][i]);
-      }
-    },
-    (error) => {
-      console.log("Error getting messages: " + error);
-    });
+    // axios.defaults.headers.common['Authorization'] = res.data.token;
+    let lst_messages = [];
+    // axios.get(baseURL + "/messages")
+    // .then((response) => {
+    //   for(let i = 0; i < response.data["messages"].length; i++){
+    //     lst_messages.push(response.data["messages"][i]);
+    //   }
+    // },
+    // (error) => {
+    //   console.log("Error getting messages: " + error);
+    // });
     return lst_messages;
   },
   getMessage(messageID) {
