@@ -17,6 +17,7 @@ export default {
     (error)=>{
       console.log("Error getting messages: " + error);
     });
+    return lst_messages;
   },
   getMessage(messageID) {
     return apiClient.get(`/messages/${messageID}`);
