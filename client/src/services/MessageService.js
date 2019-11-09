@@ -6,7 +6,17 @@ const apiClient = axios.create({
 });
 export default {
   getMessages() {
-    return apiClient.get(`/messages`);
+    lst_messages = [];
+
+    axios.get(baseURL + "/messages")
+    .then((response) => {
+      for(let i = 0; i < response.data["messages"].length; i++){
+        lst.messages.push(response.data["messages"][i]);
+      }
+    },
+    (error)=>{
+      console.log("Error getting messages: " + error);
+    });
   },
   getMessage(messageID) {
     return apiClient.get(`/messages/${messageID}`);
