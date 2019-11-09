@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Item from "./views/Item.vue";
 import About from "./views/About.vue";
+import Search from "./views/Search.vue";
 import Login from "./views/Login.vue";
 
 Vue.use(Router);
@@ -31,6 +32,11 @@ export default new Router({
       path: "/about",
       name: "About",
       component: About
+    },
+    {
+      path: "/search",
+      name: "Search",
+      component: Search
     },
     {
       path: "/login",
