@@ -1,8 +1,13 @@
+<style>
+  @import '../assets/css/myTable.css';
+</style>
+
 <template>
   <div>
     <nav-bar />
-    <div class="container w-2/3 mx-auto">
-      <v-card>
+    <div class="container w-5/6 mx-auto">
+      <v-card >
+        <div class="myCard">
         <v-card-title>
           Gratitude Messages
           <v-spacer></v-spacer>
@@ -13,6 +18,9 @@
             hide-details
           ></v-text-field>
         </v-card-title>
+        </div>
+
+        <div class="myTable">
 
         <v-data-table
           :items="messages"
@@ -24,11 +32,21 @@
             itemsPerPageAllText: '',
             itemsPerPageOptions: [10]
           }"
+          class="myTable"
         >
+        <template slot=”items” slot-scope="props">
+           <td>{{ props.item.recipientName }}</td>
+           <td>{{ props.item.beneficiaryName }}</td>
+           <td>{{ props.item.timestamp }}</td>
+           <td>{{ props.item.link }}</td>
+        </template>
         </v-data-table>
+        </div>
+
       </v-card>
+      </div>
+
     </div>
-  </div>
 </template>
 
 <script>
@@ -62,7 +80,8 @@ export default {
 
             return dayDiff;
           }
-        }
+        },
+        { text: "Gratitude Message", value: "link", align: "left"}
       ],
       messages: []
     };
@@ -80,22 +99,26 @@ export default {
           {
             recipientName: "Liftovers",
             beneficiaryName: "Sonia",
-            timestamp: "04/10/1940"
+            timestamp: "04/10/1940",
+            link: "Link"
           },
           {
             recipientName: "Feed the Kids",
             beneficiaryName: "Ignas",
-            timestamp: "18/06/1942"
+            timestamp: "18/06/1942", 
+            link: "Link"
           },
           {
             recipientName: "Gratitude",
             beneficiaryName: "Alex",
-            timestamp: "25/02/1943"
+            timestamp: "25/02/1943", 
+            link: "Link"
           },
           {
             recipientName: "Chalmers Card",
             beneficiaryName: "Abdullah",
-            timestamp: "07/07/1940"
+            timestamp: "07/07/1940", 
+            link: "Link"
           }
         ];
       });
