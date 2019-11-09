@@ -26,7 +26,7 @@ let catch1 = router.post("/login", (req, res) => {
   const beneficiaryName = req.body.beneficiaryName;
 
   //Find message by recipient
-  Message.findOne({ recipientName: recipientName })
+  Message.find({ recipientName: recipientName })
       .then(message => {
         const token = signToken(Message);
         res.status(200).json({ token: "Bearer " + token });
@@ -40,17 +40,17 @@ let catch1 = router.post("/login", (req, res) => {
 
 
   //Find message by organization
-  Message.findOne({ beneficiaryName: beneficiaryName })
+  Message.find({ beneficiaryName: beneficiaryName })
     .then(message => {
       const token = signToken(Message);
       res.status(200).json({ token: "Bearer " + token });
-      });
-    });
+      })
+
     .catch(err => {
   console.log(err);
   //return internal server error
   return res.status(500).json(err);
-});
+})
 
 });
 
