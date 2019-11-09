@@ -9,6 +9,7 @@ import "@/assets/css/tailwind.css";
 import gtag from "./plugins/gtag";
 import api from "./plugins/api";
 import TableComponent from "vue-table-component";
+import vuetify from "./plugins/vuetify";
 
 Vue.config.productionTip = false;
 
@@ -27,5 +28,6 @@ router.beforeEach((to, from, next) => {
 new Vue({
   router,
   store,
+  vuetify,
   render: h => h(App)
 }).$mount("#app");

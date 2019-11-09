@@ -1,49 +1,32 @@
 <template>
   <div>
     <nav-bar />
-
     <div class="container w-2/3 mx-auto">
-      <table-component
-        :data="messages"
-        :show-caption="false"
-        :sort-by="organization"
-        :sort-order="asc"
-        filter-no-results="There are no matching results"
-        filter-placeholder="Search Beneficiary Name, Recipient Name or timestamp"
-        filter-input-class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
-        table-class="w-full rounded-lg overflow-hidden sm:shadow-lg my-5"
-      >
-        <table-column
-          show="recipientName"
-          label="Recipient"
-          header-class="py-4 px-6 bg-grey-lightest font-bold border-b border-grey-light"
-          cell-class="py-4 px-6 bg-grey-lightest border-b border-grey-light"
-        />
-        <table-column
-          show="beneficiaryName"
-          label="Beneficiary"
-          header-class="py-4 px-6 bg-grey-lightest font-bold border-b border-grey-light"
-          cell-class="py-4 px-6 bg-grey-lightest border-b border-grey-light"
-        />
-        <table-column
-          show="timestamp"
-          label="Timestamp"
-          data-type="date:DD/MM/YYYY"
-          header-class="py-4 px-6 bg-grey-lightest font-bold border-b border-grey-light"
-          cell-class="py-4 px-6 bg-grey-lightest border-b border-grey-light"
-        />
-        <table-column
-          label="Gratitude Message"
-          :sortable="false"
-          :filterable="false"
-          header-class="py-4 px-6 bg-grey-lightest font-bold border-b border-grey-light"
-          cell-class="py-4 px-6 bg-grey-lightest border-b border-grey-light"
+      <v-card>
+        <v-card-title>
+          Gratitude Messages
+          <v-spacer></v-spacer>
+          <v-text-field
+            v-model="search"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>
+        </v-card-title>
+
+        <v-data-table
+          :items="messages"
+          :headers="headers"
+          :loading="true"
+          :fixed-header="true"
+          :search="search"
+          :footer-props="{
+            itemsPerPageAllText: '',
+            itemsPerPageOptions: [10]
+          }"
         >
-          <template slot-scope="row">
-            <a :href="`#${row.organization}`">Link</a>
-          </template>
-        </table-column>
-      </table-component>
+        </v-data-table>
+      </v-card>
     </div>
   </div>
 </template>
@@ -58,6 +41,29 @@ export default {
   },
   data() {
     return {
+      search: "",
+      headers: [
+        { text: "Recipient", value: "recipientName", align: "left" },
+        { text: "Beneficiary", value: "beneficiaryName", align: "left" },
+        {
+          text: "Date",
+          value: "timestamp",
+          align: "left",
+          sort: (dateA, dateB) => {
+            let a = dateA.split("/");
+            let b = dateB.split("/");
+
+            let yearDiff = parseInt(a[2]) - parseInt(b[2]);
+            let monthDiff = parseInt(a[1]) - parseInt(b[1]);
+            let dayDiff = parseInt(a[0]) - parseInt(b[0]);
+
+            if (yearDiff !== 0) return yearDiff;
+            else if (monthDiff !== 0) return monthDiff;
+
+            return dayDiff;
+          }
+        }
+      ],
       messages: []
     };
   },
