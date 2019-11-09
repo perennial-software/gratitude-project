@@ -1,62 +1,5 @@
 const express = require("express");
 const router = express.Router();
-<<<<<<< HEAD
-const bcrypt = require("bcrypt");
-const signToken = require("../../utils/signJWT");
-
-//Load user model
-const Message = require("../../models/Message");
-
-//  @route GET api/message/
-//  @desc Tests messages router
-//  @access Public
-router.get("/", (req, res) => res.json({ success: "Message" }));
-
-//  @route GET api/messsages/login
-//  @desc Login User and return a JWT on success
-//  @access Public
-let catch1 = router.post("/login", (req, res) => {
-  const { errors, isValid } = validateLoginInput(req.body);
-
-  //Check validation
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
-
-  const recipientName = req.body.recipientName;
-  const beneficiaryName = req.body.beneficiaryName;
-
-  //Find message by recipient
-  Message.find({ recipientName: recipientName })
-      .then(message => {
-        const token = signToken(Message);
-        res.status(200).json({ token: "Bearer " + token });
-      });
-})
-    .catch(err => {
-      console.log(err);
-      //return internal server error
-      return res.status(500).json(err);
-    });
-
-
-  //Find message by organization
-  Message.find({ beneficiaryName: beneficiaryName })
-    .then(message => {
-      const token = signToken(Message);
-      res.status(200).json({ token: "Bearer " + token });
-      })
-
-    .catch(err => {
-  console.log(err);
-  //return internal server error
-  return res.status(500).json(err);
-})
-
-});
-
-
-=======
 const passport = require("passport");
 
 //load input validation
@@ -141,6 +84,5 @@ router.post(
       });
   }
 );
->>>>>>> 71bfc4be876f82f402035b9e972b87433251ec17
 
 module.exports = router;
