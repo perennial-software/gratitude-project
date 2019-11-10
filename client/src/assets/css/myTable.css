@@ -1,16 +1,23 @@
-.myTable .theme--light.v-data-table.td{
+.tableCard {
+    background-color: #8ac4ff;
+    font-weight:bold;
+    color:white;
+}
+
+
+.tableTitle {
+    font-weight: bold;
+    color: white;
+    background-color: #8ac4ff;
+
+}
+
+.tableData .theme--light.v-data-table.td{
     color: black;
 }
 
-.myTable .theme--light.v-data-table{
+
+.tableData .theme--light.v-data-table{
     background-color: #8AC4FF;
     color: white;
 }
-
-.myCard .theme--light.v-card{
-    background-color: #8AC4FF;
-    color: white;
-    font-weight: bold;
-}
-
-
