@@ -90,6 +90,7 @@ export default {
     // api call goes here
     MessagesService.getMessages()
       .then(response => {
+        console.log(response)
         this.messages = response.data;
       })
       .catch(error => {
