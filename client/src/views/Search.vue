@@ -32,11 +32,10 @@
               itemsPerPageOptions: [10]
             }"
           >
-            <template class="tableData" slot="”items”" slot-scope="props">
-              <td>{{ props.item.recipientName }}</td>
-              <td>{{ props.item.beneficiaryName }}</td>
-              <td>{{ props.item.timestamp }}</td>
-              <td>{{ props.item.link }}</td>
+            <template v-slot:item.videoURL="{ item }">
+              <td>
+                <a :href="item.videoURL" target="_blank">Click Here to View</a>
+              </td>
             </template>
           </v-data-table>
         </v-card>
@@ -61,23 +60,23 @@ export default {
         { text: "Beneficiary", value: "beneficiaryName", align: "left" },
         {
           text: "Date",
-          value: "timestamp",
-          align: "left",
-          sort: (dateA, dateB) => {
-            let a = dateA.split("/");
-            let b = dateB.split("/");
-
-            let yearDiff = parseInt(a[2]) - parseInt(b[2]);
-            let monthDiff = parseInt(a[1]) - parseInt(b[1]);
-            let dayDiff = parseInt(a[0]) - parseInt(b[0]);
-
-            if (yearDiff !== 0) return yearDiff;
-            else if (monthDiff !== 0) return monthDiff;
-
-            return dayDiff;
-          }
+          value: "date",
+          align: "left"
+          // sort: (dateA, dateB) => {
+          //   let a = dateA.substring(0, 10).split("-");
+          //   let b = dateB.substring(0, 10).split("-");
+          //
+          //   let yearDiff = parseInt(a[2]) - parseInt(b[2]);
+          //   let monthDiff = parseInt(a[1]) - parseInt(b[1]);
+          //   let dayDiff = parseInt(a[0]) - parseInt(b[0]);
+          //
+          //   if (yearDiff !== 0) return yearDiff;
+          //   else if (monthDiff !== 0) return monthDiff;
+          //
+          //   return dayDiff;
+          // }
         },
-        { text: "Gratitude Message", value: "link", align: "left" }
+        { text: "Gratitude Message", value: "videoURL", align: "left" }
       ],
       messages: []
     };
@@ -86,38 +85,39 @@ export default {
     // api call goes here
     MessagesService.getMessages()
       .then(response => {
-        console.log(response)
-        this.messages = response.data;
+        console.log(response);
+        this.messages = response;
+        console.log(this.messages);
       })
       .catch(error => {
         console.log("Error: ", error.response);
         // at the moment- use fake data in case of error
-        this.messages = [
-          {
-            recipientName: "Liftovers",
-            beneficiaryName: "Sonia",
-            timestamp: "04/10/1940",
-            link: "Link"
-          },
-          {
-            recipientName: "Feed the Kids",
-            beneficiaryName: "Ignas",
-            timestamp: "18/06/1942",
-            link: "Link"
-          },
-          {
-            recipientName: "Gratitude",
-            beneficiaryName: "Alex",
-            timestamp: "25/02/1943",
-            link: "Link"
-          },
-          {
-            recipientName: "Chalmers Card",
-            beneficiaryName: "Abdullah",
-            timestamp: "07/07/1940",
-            link: "Link"
-          }
-        ];
+        // this.messages = [
+        //   {
+        //     recipientName: "Liftovers",
+        //     beneficiaryName: "Sonia",
+        //     timestamp: "04/10/1940",
+        //     link: "Link"
+        //   },
+        //   {
+        //     recipientName: "Feed the Kids",
+        //     beneficiaryName: "Ignas",
+        //     timestamp: "18/06/1942",
+        //     link: "Link"
+        //   },
+        //   {
+        //     recipientName: "Gratitude",
+        //     beneficiaryName: "Alex",
+        //     timestamp: "25/02/1943",
+        //     link: "Link"
+        //   },
+        //   {
+        //     recipientName: "Chalmers Card",
+        //     beneficiaryName: "Abdullah",
+        //     timestamp: "07/07/1940",
+        //     link: "Link"
+        //   }
+        // ];
       });
 
     // temporarily use hardcoded messages
