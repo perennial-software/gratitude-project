@@ -14,6 +14,7 @@
         >
         Create
       </button>
+      <br>
       <button
       type="button"
         v-on:click="changeToSearch"
