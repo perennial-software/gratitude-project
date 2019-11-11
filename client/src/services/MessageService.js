@@ -9,7 +9,7 @@ export default {
     console.log("axios call started")
     axios.defaults.headers.common['Authorization'] = localStorage.token;
     let lst_messages = [];
-    axios.get("http://localhost:5000/api/messages")
+    let result = axios.get("http://localhost:5000/api/messages")
     .then((response) => {
       // lst_messages = response.data.map(function(item){ 
       //   return item; 
@@ -23,7 +23,7 @@ export default {
     (error) => {
       console.log("Error getting messages: " + error);
     });
-    
+    return result
   },
   getMessage(messageID) {
     return apiClient.get(`/messages/${messageID}`);
