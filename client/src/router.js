@@ -38,7 +38,7 @@ export default new Router({
       meta: {
         requiresAuth: true
       },
-      component: () => import("./views/Search.vue"),
+      component: () => import("./views/Search.vue")
     },
     {
       path: "/dashboard",
@@ -46,7 +46,7 @@ export default new Router({
       meta: {
         requiresAuth: true
       },
-      component: () => import("./views/Userdashboard.vue"),
+      component: () => import("./views/Userdashboard.vue")
     },
     {
       path: "/login",

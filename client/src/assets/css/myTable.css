@@ -1,16 +1,29 @@
-.myTable .theme--light.v-data-table.td{
-    color: black;
+.tableCard {
+  background-color: #8ac4ff;
+  font-weight: bold;
+  color: white;
 }
 
-.myTable .theme--light.v-data-table{
-    background-color: #8AC4FF;
-    color: white;
+.tableTitle {
+  font-weight: bold;
+  color: white;
+  background-color: #8ac4ff;
 }
 
-.myCard .theme--light.v-card{
-    background-color: #8AC4FF;
-    color: white;
-    font-weight: bold;
+.tableData .theme--light.v-data-table {
+  background-color: #8ac4ff;
+  color: white;
 }
 
+.theme--light.v-data-table.v-data-table--fixed-header thead th {
+  background: #8ac4ff;
+  color: white;
+}
+.theme--light.v-label {
+  color: white;
+}
 
+.theme--light.v-input:not(.v-input--is-disabled) input,
+.theme--light.v-input:not(.v-input--is-disabled) textarea {
+  color: white;
+}

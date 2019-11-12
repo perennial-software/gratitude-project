@@ -4,24 +4,29 @@
   >
     <h1 class="italic font-bold text-2xl">gratitude project</h1>
     <span>
-    <router-link v-if="about" :to="{ name: 'About' }" class="text-xl navItem">about</router-link>
-    <span v-if="!hideLoginItem">
-    <span class="navItem text-xl" v-if="token" v-on:click="logout" >Logout</span>
-    <router-link v-else :to="{ name: 'Login' }" class="navItem text-xl">Login</router-link>
-    </span>
+      <router-link v-if="about" :to="{ name: 'About' }" class="text-xl navItem"
+        >about</router-link
+      >
+      <span v-if="!hideLoginItem">
+        <span class="navItem text-xl" v-if="token" v-on:click="logout"
+          >Logout</span
+        >
+        <router-link v-else :to="{ name: 'Login' }" class="navItem text-xl"
+          >Login</router-link
+        >
+      </span>
     </span>
   </div>
 </template>
 <style>
-  .navItem{
-    margin-left:10px;
-    cursor:pointer;
-  }
+.navItem {
+  margin-left: 10px;
+  cursor: pointer;
+}
 </style>
 <script>
-
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import Vue from "vue";
+import VueRouter from "vue-router";
 Vue.use(VueRouter);
 export default {
   name: "NavBar",
@@ -37,16 +42,16 @@ export default {
       default: false
     }
   },
-  data(){
+  data() {
     return {
       token: localStorage.getItem("token")
-    }
+    };
   },
-  methods:{
-    logout(){
+  methods: {
+    logout() {
       localStorage.removeItem("token");
       console.log("Deleted token from local storage");
-      this.$router.push('/login');
+      this.$router.push("/login");
     }
   }
 };
