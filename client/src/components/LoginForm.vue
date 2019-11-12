@@ -74,7 +74,7 @@ export default {
         }
         //redirects to home page if token is valid
         console.log("user already signed in");
-        this.$router.push("/create");
+        this.$router.push("/dashboard");
       } catch (err) {
         console.log(err);
       }
@@ -99,7 +99,7 @@ export default {
             localStorage.setItem("token", res.data.token);
             this.$store.commit("setNameId", decoded.name, decoded.id);
             console.log("the name in storage is " + this.$store.state.name);
-            self.$router.push("/create");
+            self.$router.push("/dashboard");
           }
         })
         .catch(err => {
