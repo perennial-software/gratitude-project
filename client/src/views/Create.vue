@@ -35,13 +35,29 @@ export default {
   },
   methods: {
     submit(gratitudeMessage) {
-      this.$api.postGratitudeMessage(gratitudeMessage).then(message => {
+      MessagesService.postMessage(gratitudeMessage)
+      .then(message => {
+        // gtag stats 
         this.$gtag("event", "create_message", {
           event_category: "gratitude_message",
-          event_label: `${message.id}`
+          event_label: `${message._id}`
         });
+        // redirect to new page on success
         this.$router.push({ name: "Item", params: { id: message.id } });
+      })
+      .catch(error => {
+          console.log("Error: ", error.response);
+          // Jason should add redirection here to screen with error 
       });
+
+      // old code 
+      // this.$api.postGratitudeMessage(gratitudeMessage).then(message => {
+      //   this.$gtag("event", "create_message", {
+      //     event_category: "gratitude_message",
+      //     event_label: `${message.id}`
+      //   });
+      //   this.$router.push({ name: "Item", params: { id: message.id } });
+      // });
     }
   }
 };

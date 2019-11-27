@@ -10,7 +10,6 @@ const app = express();
 //load routes
 const users = require("./routes/api/users");
 const messages = require("./routes/api/messages");
-const sendgrid = require("./routes/api/sendgrid")
 
 //bodyParser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -37,8 +36,7 @@ app.get("/", (req, res) => res.send("API Running"));
 app.use("/api/users", users);
 //messages routes
 app.use("/api/messages", messages);
-// email routes 
-app.use("/api/emails", sendgrid)
+
 
 const PORT = process.env.PORT || 5000;
 
