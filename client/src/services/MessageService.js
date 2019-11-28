@@ -15,9 +15,6 @@ export default {
         //   return item;
         // })
         lst_messages = response.data;
-        console.log("answers");
-        console.log(lst_messages);
-        console.log("end answers");
         return lst_messages;
       },
       error => {
@@ -29,7 +26,22 @@ export default {
   getMessage(messageID) {
     return apiClient.get(`/messages/${messageID}`);
   },
+
+  // Adds message to database and sends email to recipient
   postMessage(message) {
-    return apiClient.post(`/messages`);
+    apiClient.post(`/messages/`, {
+        beneficiaryName: message.beneficiaryName, 
+        recipientName: message.recipientName, 
+        recipientEmail: message.recipientEmail, 
+        callsToAction: JSON.stringify(message.callsToAction),  // TODO: double check stringify will render JSON object 
+        videoURL: message.videoURL
+    })
+    .then(response => {
+      return response.data
+    })
+    .catch(err => {
+      console.log("Error sending message")
+      return err
+    });
   }
 };

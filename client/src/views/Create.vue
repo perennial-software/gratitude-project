@@ -7,7 +7,7 @@
     >
       <gratitude-message-form v-model="gratitudeMessage" @submit="submit" />
       <transition name="slide-fade">
-      <div class="emailFailed" v-if="emailFailed">There was an error sending the email. Please contact the administrator.</div>
+      <div class="msgFailed" v-if="msgFailed">There was an error sending the message. Please contact the administrator.</div>
       </transition>
     </div>
   </div>
@@ -24,7 +24,7 @@
   transform: translateY(10px);
   opacity: 0;
 }
-.emailFailed{
+.msgFailed{
   color:red;
   background-color: pink;
   text-align:center;
@@ -57,24 +57,34 @@ export default {
           link: ""
         }))
       },
-      emailFailed: false,
+      msgFailed: false,
     };
   },
   methods: {
     submit(gratitudeMessage) {
-      this.$api.postGratitudeMessage(gratitudeMessage).then(message => {
+      MessagesService.postMessage(gratitudeMessage)
+      .then(message => {
+        // gtag stats 
         this.$gtag("event", "create_message", {
           event_category: "gratitude_message",
-          event_label: `${message.id}`
+          event_label: `${message._id}`
         });
-        var wasEmailSent = false; // Check if email was sent here
-        if (!wasEmailSent){
-          this.emailFailed = true;
-        }
-        else{
-          this.$router.push({ name: "Item", params: { id: message.id } });
-        }
+        // redirect to new page on success
+        this.$router.push({ name: "Item", params: { id: message.id } });
+      })
+      .catch(error => {
+          console.log("Error: ", error.response);
+          this.msgFailed = true; // Display error message 
       });
+
+      // old code 
+      // this.$api.postGratitudeMessage(gratitudeMessage).then(message => {
+      //   this.$gtag("event", "create_message", {
+      //     event_category: "gratitude_message",
+      //     event_label: `${message.id}`
+      //   });
+      //   this.$router.push({ name: "Item", params: { id: message.id } });
+      // });
     }
   }
 };

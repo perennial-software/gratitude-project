@@ -91,36 +91,7 @@ export default {
       })
       .catch(error => {
         console.log("Error: ", error.response);
-        // at the moment- use fake data in case of error
-        // this.messages = [
-        //   {
-        //     recipientName: "Liftovers",
-        //     beneficiaryName: "Sonia",
-        //     timestamp: "04/10/1940",
-        //     link: "Link"
-        //   },
-        //   {
-        //     recipientName: "Feed the Kids",
-        //     beneficiaryName: "Ignas",
-        //     timestamp: "18/06/1942",
-        //     link: "Link"
-        //   },
-        //   {
-        //     recipientName: "Gratitude",
-        //     beneficiaryName: "Alex",
-        //     timestamp: "25/02/1943",
-        //     link: "Link"
-        //   },
-        //   {
-        //     recipientName: "Chalmers Card",
-        //     beneficiaryName: "Abdullah",
-        //     timestamp: "07/07/1940",
-        //     link: "Link"
-        //   }
-        // ];
       });
-
-    // temporarily use hardcoded messages
   }
 };
 </script>
