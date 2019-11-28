@@ -9,14 +9,14 @@
       <v-card class="tableCard">
         <v-card-title class="tableTitle">
           Gratitude Messages
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-text-field
             class="tableSearch v-input--is-focused"
             v-model="search"
-            label="Search"
+            label="Search by name or date"
             single-line
             hide-details
-          ></v-text-field>
+          />
         </v-card-title>
         <v-card class="tableData" :light="true">
           <v-data-table
@@ -34,7 +34,7 @@
           >
             <template v-slot:item.videoURL="{ item }">
               <td>
-                <a :href="item.videoURL" target="_blank">Click Here to View</a>
+                <a :href="'/g/' + item._id">Click Here to View</a>
               </td>
             </template>
           </v-data-table>
