@@ -33,7 +33,7 @@ export default {
         beneficiaryName: message.beneficiaryName, 
         recipientName: message.recipientName, 
         recipientEmail: message.recipientEmail, 
-        callsToAction: message.callsToAction, 
+        callsToAction: JSON.stringify(message.callsToAction),  // TODO: double check stringify will render JSON object 
         videoURL: message.videoURL
     })
     .then(response => {

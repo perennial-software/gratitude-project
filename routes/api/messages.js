@@ -72,15 +72,16 @@ router.post("/", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  const testText = `Hey ${req.body.recipientName}, \n This is a test message.`;
-  const testHTML = `Hey <strong>${req.body.recipientName}</strong>, <p> This is a test message. </p>`;
-
   const email = {
     to: req.body.recipientEmail,
     from: "test@test.com",
-    subject: "Gratitude Message",
-    text: testText,
-    html: testHTML
+    templateId: 'd-95ecec114f8b4fe7984adb619daa2cc3',
+    dynamic_template_data: {
+      subject: 'Extending our gratitude!',
+      beneficiaryName: req.body.beneficiaryName,
+      recipientName: req.body.recipientName,
+      videoURL: req.body.videoURL, 
+    }
   };
 
   sgMail
