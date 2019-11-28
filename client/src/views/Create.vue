@@ -6,9 +6,35 @@
       style="max-width: 960px;"
     >
       <gratitude-message-form v-model="gratitudeMessage" @submit="submit" />
+      <transition name="slide-fade">
+      <div class="emailFailed" v-if="emailFailed">There was an error sending the email. Please contact the administrator.</div>
+      </transition>
     </div>
   </div>
 </template>
+
+<style>
+.slide-fade-enter-active {
+  transition: all .6s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to{
+  transform: translateY(10px);
+  opacity: 0;
+}
+.emailFailed{
+  color:red;
+  background-color: pink;
+  text-align:center;
+  border: medium solid red;
+  border-radius: 8px;
+  padding: 10px 5px;
+  margin-bottom:50px;
+}
+</style>
+
 <script>
 import NavBar from "@/components/NavBar.vue";
 import GratitudeMessageForm from "@/components/GratitudeMessageForm.vue";
@@ -30,7 +56,8 @@ export default {
           description: "",
           link: ""
         }))
-      }
+      },
+      emailFailed: false,
     };
   },
   methods: {
@@ -40,7 +67,13 @@ export default {
           event_category: "gratitude_message",
           event_label: `${message.id}`
         });
-        this.$router.push({ name: "Item", params: { id: message.id } });
+        var wasEmailSent = false; // Check if email was sent here
+        if (!wasEmailSent){
+          this.emailFailed = true;
+        }
+        else{
+          this.$router.push({ name: "Item", params: { id: message.id } });
+        }
       });
     }
   }
