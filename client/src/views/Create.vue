@@ -6,9 +6,35 @@
       style="max-width: 960px;"
     >
       <gratitude-message-form v-model="gratitudeMessage" @submit="submit" />
+      <transition name="slide-fade">
+      <div class="msgFailed" v-if="msgFailed">There was an error sending the message. Please contact the administrator.</div>
+      </transition>
     </div>
   </div>
 </template>
+
+<style>
+.slide-fade-enter-active {
+  transition: all .6s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to{
+  transform: translateY(10px);
+  opacity: 0;
+}
+.msgFailed{
+  color:red;
+  background-color: pink;
+  text-align:center;
+  border: medium solid red;
+  border-radius: 8px;
+  padding: 10px 5px;
+  margin-bottom:50px;
+}
+</style>
+
 <script>
 import NavBar from "@/components/NavBar.vue";
 import GratitudeMessageForm from "@/components/GratitudeMessageForm.vue";
@@ -30,7 +56,8 @@ export default {
           description: "",
           link: ""
         }))
-      }
+      },
+      msgFailed: false,
     };
   },
   methods: {
@@ -47,7 +74,7 @@ export default {
       })
       .catch(error => {
           console.log("Error: ", error.response);
-          // Jason should add redirection here to screen with error 
+          this.msgFailed = true; // Display error message 
       });
 
       // old code 
