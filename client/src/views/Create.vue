@@ -64,7 +64,11 @@ export default {
   methods: {
     submit(gratitudeMessage) {
       var self = this;
-      var result = MessagesService.postMessage(gratitudeMessage)
+      console.log("GRATITUDE MESSAGE")
+      console.log(JSON.stringify(gratitudeMessage))
+      let result = MessagesService.postMessage(JSON.stringify(gratitudeMessage))
+
+
       result.then(message => {
         // gtag stats 
         this.$gtag("event", "create_message", {

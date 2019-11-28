@@ -29,19 +29,15 @@ export default {
 
   // Adds message to database and sends email to recipient
   postMessage(message) {
-    apiClient.post(`/messages/`, {
+    // let message = JSON.parse(msg)
+    console.log("POST " + message)
+
+    return apiClient.post(`/messages/`, {
         beneficiaryName: message.beneficiaryName, 
         recipientName: message.recipientName, 
         recipientEmail: message.recipientEmail, 
-        callsToAction: JSON.stringify(message.callsToAction),  // TODO: double check stringify will render JSON object 
+        callsToAction: message.callsToAction,  
         videoURL: message.videoURL
     })
-    .then(response => {
-      return response.data
-    })
-    .catch(err => {
-      console.log("Error sending message")
-      return err
-    });
   }
 };
