@@ -38,6 +38,7 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import GratitudeMessageForm from "@/components/GratitudeMessageForm.vue";
+import MessagesService from "../services/MessageService";
 
 export default {
   components: {
@@ -62,8 +63,9 @@ export default {
   },
   methods: {
     submit(gratitudeMessage) {
-      MessagesService.postMessage(gratitudeMessage)
-      .then(message => {
+      var self = this;
+      var result = MessagesService.postMessage(gratitudeMessage)
+      result.then(message => {
         // gtag stats 
         this.$gtag("event", "create_message", {
           event_category: "gratitude_message",
@@ -74,7 +76,7 @@ export default {
       })
       .catch(error => {
           console.log("Error: ", error.response);
-          this.msgFailed = true; // Display error message 
+          self.msgFailed = true; // Display error message 
       });
 
       // old code 
