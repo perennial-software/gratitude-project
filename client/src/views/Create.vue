@@ -7,7 +7,7 @@
     >
       <gratitude-message-form v-model="gratitudeMessage" @submit="submit" />
       <transition name="slide-fade">
-      <div class="msgFailed" v-if="msgFailed">There was an error sending the message. Please contact the administrator.</div>
+      <div v-if="isLoading" v-bind:class="{ 'msgFailed': msgFailed, 'msgLoading': !msgFailed }">{{msgText}}</div>
       </transition>
     </div>
   </div>
@@ -24,7 +24,21 @@
   transform: translateY(10px);
   opacity: 0;
 }
+.msgLoading{
+  position:fixed;
+  bottom:25px;
+  color:blue;
+  background-color: lightblue;
+  text-align:center;
+  border: medium solid blue;
+  border-radius: 8px;
+  padding: 10px 5px;
+  margin-bottom:50px;
+
+}
 .msgFailed{
+  position:fixed;
+  bottom:25px;
   color:red;
   background-color: pink;
   text-align:center;
@@ -59,16 +73,15 @@ export default {
         }))
       },
       msgFailed: false,
+      isLoading: false,
     };
   },
   methods: {
     submit(gratitudeMessage) {
+      this.isLoading = true;
+      this.msgText = "Sending message ..."
       var self = this;
-      console.log("GRATITUDE MESSAGE")
-      console.log(JSON.stringify(gratitudeMessage))
-      let result = MessagesService.postMessage(JSON.stringify(gratitudeMessage))
-
-
+      var result = MessagesService.postMessage(gratitudeMessage)
       result.then(message => {
         // gtag stats 
         this.$gtag("event", "create_message", {
@@ -80,6 +93,7 @@ export default {
       })
       .catch(error => {
           console.log("Error: ", error.response);
+          self.msgText = "There was an error sending the message. Please contact the administrator."
           self.msgFailed = true; // Display error message 
       });
 
