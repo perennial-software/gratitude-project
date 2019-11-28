@@ -77,7 +77,7 @@ router.post("/", (req, res) => {
     from: "test@test.com",
     templateId: 'd-95ecec114f8b4fe7984adb619daa2cc3',
     dynamic_template_data: {
-      subject: 'Extending our gratitude!',
+      subject: 'Gratitude Message',
       beneficiaryName: req.body.beneficiaryName,
       recipientName: req.body.recipientName,
       videoURL: req.body.videoURL, 
