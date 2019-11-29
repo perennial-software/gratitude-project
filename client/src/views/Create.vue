@@ -98,7 +98,7 @@ export default {
       .catch(error => {
           var error_msg = "*Error: "
           console.log("Error: ", error.response);
-          if (typeof error.response.data === "string"){
+          if (!error.response.data.response){
             for(const [key, value] of Object.entries(error.response.data)) {
               error_msg += value + "\n";
             }
