@@ -4,7 +4,6 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "npm run dev",
     "server": "nodemon server.js",
     "dev": "concurrently \"npm run server\" \"npm run serve --prefix client\""
   },
