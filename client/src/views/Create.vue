@@ -6,9 +6,8 @@
       style="max-width: 960px;"
     >
       <gratitude-message-form v-model="gratitudeMessage" @submit="submit" />
-      <transition name="slide-fade">
-      <div v-if="isLoading" v-bind:class="{ 'msgFailed': msgFailed, 'msgLoading': !msgFailed }">{{msgText}}</div>
-      </transition>
+      <div id="statusMsg" v-html="msgText" v-bind:class="{ 'msgHidden': !isLoading, 'msgFailed': msgFailed, 'msgLoading': !msgFailed }"></div>
+      
     </div>
   </div>
 </template>
@@ -24,9 +23,10 @@
   transform: translateY(10px);
   opacity: 0;
 }
+.msgHidden{
+  visibility:hidden;
+}
 .msgLoading{
-  position:fixed;
-  bottom:25px;
   color:blue;
   background-color: lightblue;
   text-align:center;
@@ -37,8 +37,6 @@
 
 }
 .msgFailed{
-  position:fixed;
-  bottom:25px;
   color:red;
   background-color: pink;
   text-align:center;
@@ -75,6 +73,7 @@ export default {
       },
       msgFailed: false,
       isLoading: false,
+      msgText: "",
     };
   },
   methods: {
@@ -96,12 +95,22 @@ export default {
         console.log("wow redirect")
       })
       .catch(error => {
-          console.log("Error: ", error.response);
+          console.log("Error: ", error);
           // TODO: Jason, the error response has very specific errors if there are missing fields on the form
           // please refer to message.js to see the errors being passed as the response and use them to 
           // make the error message more specific.
-          self.msgText = "There was an error sending the message. Please contact the administrator."
+          if(error.response && error.response.status === 400){
+            for (const prop of Object.keys(error.response.body)) {
+                self.msgText += "<br/>" + error[prop];
+            }
+            self.msgText = self.msgText.substring(5, self.msgText.length);
+          }
+          else{
+            self.msgText = "There was an error sending the message. Please contact the administrator."
+          }
           self.msgFailed = true; // Display error message 
+          var statusMsgElement = document.getElementById('statusMsg');
+          statusMsgElement.scrollIntoView();
       });
 
       // old code 
