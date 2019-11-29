@@ -95,19 +95,16 @@ export default {
         console.log("wow redirect")
       })
       .catch(error => {
-          console.log("Error: ", error);
-          // TODO: Jason, the error response has very specific errors if there are missing fields on the form
-          // please refer to message.js to see the errors being passed as the response and use them to 
-          // make the error message more specific.
-          if(error.response && error.response.status === 400){
-            for (const prop of Object.keys(error.response.body)) {
-                self.msgText += "<br/>" + error[prop];
+          var error_msg = "*Error: "
+          console.log("Error: ", error.response);
+          if (!error.response.data.response){
+            for(const [key, value] of Object.entries(error.response.data)) {
+              error_msg += value + "\n";
             }
-            self.msgText = self.msgText.substring(5, self.msgText.length);
+          } else {
+            error_msg += error.response.data.response.body.errors[0]["message"];
           }
-          else{
-            self.msgText = "There was an error sending the message. Please contact the administrator."
-          }
+          self.msgText = error_msg;
           self.msgFailed = true; // Display error message 
           var statusMsgElement = document.getElementById('statusMsg');
           statusMsgElement.scrollIntoView();
