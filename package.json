@@ -4,6 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
+    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build",
     "server": "nodemon server.js",
     "dev": "concurrently \"npm run server\" \"npm run serve --prefix client\""
   },

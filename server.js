@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const serveStatic = require('serve-static');
 const config = require("config");
 const cors = require("cors");
 const passport = require("passport");
@@ -28,6 +29,8 @@ app.use(passport.initialize());
 
 //Passport Setup
 require("./utils/passport")(passport);
+
+app.use(serveStatic(__dirname + "/dist"));
 
 //test route remove it during deployment
 app.get("/", (req, res) => res.send("API Running"));
