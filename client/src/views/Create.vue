@@ -84,7 +84,7 @@ export default {
       var self = this;
       var result = MessagesService.postMessage(gratitudeMessage)
       .then(message => {
-        console.log("success")
+        this.msgText = "Message Sent"
         // gtag stats 
         this.$gtag("event", "create_message", {
           event_category: "gratitude_message",

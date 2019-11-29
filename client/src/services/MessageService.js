@@ -37,7 +37,7 @@ export default {
         recipientName: message.recipientName, 
         recipientEmail: message.recipientEmail, 
         callsToAction: message.callsToAction,  
-        videoURL: message.videoURL
+        videoURL: message.videoUrl
     })
   }
 };
