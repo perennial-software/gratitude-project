@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:5000/api" // update later
+  baseURL: "https://ourgp.herokuapp.com/api" // update later
   // can add credentials and such here
 });
 export default {
@@ -9,7 +9,7 @@ export default {
     console.log("axios call started");
     axios.defaults.headers.common["Authorization"] = localStorage.token;
     let lst_messages = [];
-    let result = axios.get("http://localhost:5000/api/messages").then(
+    let result = axios.get("https://ourgp.herokuapp.com/api/messages").then(
       response => {
         // lst_messages = response.data.map(function(item){
         //   return item;
