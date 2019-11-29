@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 const sgMail = require("@sendgrid/mail");
 const config = require("config");
+const Validator = require("validator");
 sgMail.setApiKey(config.get("sendgrid_api_key"));
 
 //load input validation
