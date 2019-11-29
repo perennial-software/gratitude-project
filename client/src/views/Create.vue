@@ -50,9 +50,10 @@
 </style>
 
 <script>
-import NavBar from "@/components/NavBar.vue";
-import GratitudeMessageForm from "@/components/GratitudeMessageForm.vue";
-import MessagesService from "../services/MessageService";
+  const axios = require("axios").default;
+  import NavBar from "@/components/NavBar.vue";
+  import GratitudeMessageForm from "@/components/GratitudeMessageForm.vue";
+  import MessagesService from "../services/MessageService";
 
 export default {
   components: {
@@ -82,14 +83,17 @@ export default {
       this.msgText = "Sending message ..."
       var self = this;
       var result = MessagesService.postMessage(gratitudeMessage)
-      result.then(message => {
+      .then(message => {
+        console.log("success")
         // gtag stats 
         this.$gtag("event", "create_message", {
           event_category: "gratitude_message",
           event_label: `${message._id}`
         });
+        console.log("updated cloud")
         // redirect to new page on success
         this.$router.push({ name: "Item", params: { id: message.id } });
+        console.log("wow redirect")
       })
       .catch(error => {
           console.log("Error: ", error.response);
