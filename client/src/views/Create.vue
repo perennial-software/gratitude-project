@@ -92,7 +92,7 @@ export default {
         });
         console.log("updated cloud")
         // redirect to new page on success
-        this.$router.push({ name: "Item", params: { id: message.id } });
+        this.$router.push({ name: "Item", params: { id: message._id } });
         console.log("wow redirect")
       })
       .catch(error => {
