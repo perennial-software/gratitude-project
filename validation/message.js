@@ -29,6 +29,10 @@ module.exports = function validateMessageInput(data) {
     }
   }
 
+  if (Array.isArray(data.callsToAction) && data.callsToAction.length == 0) {
+    errors.callsToAction = "Calls to action are required"
+  }
+
   return {
     errors: errors,
     isValid: isEmpty(errors)

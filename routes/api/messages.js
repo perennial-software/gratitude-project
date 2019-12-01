@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 const sgMail = require("@sendgrid/mail");
 const config = require("config");
+const Validator = require("validator");
 sgMail.setApiKey(config.get("sendgrid_api_key"));
 
 //load input validation
@@ -33,6 +34,30 @@ router.get(
         }
         console.log(messages);
         return res.json(messages);
+      })
+      .catch(err => {
+        console.log(err);
+        return res.status(404).json(err);
+      });
+  }
+);
+
+//  @route GET api/messages/:messageID
+//  @desc Gets specific message 
+//  @access Public
+router.get(
+  "/:messageID",
+  (req, res) => {
+    let errors = {};
+
+    Message.findById(req.params.messageID)
+      .then(message => {
+        if (!message) {
+          errors.noMessages = "Message not found";
+          return res.status(404).json(errors);
+        }
+        console.log(message);
+        return res.json(message);
       })
       .catch(err => {
         console.log(err);
@@ -72,15 +97,25 @@ router.post("/", (req, res) => {
     return res.status(400).json(errors);
   }
 
+  const newMessage = new Message({
+    beneficiaryName: req.body.beneficiaryName,
+    callsToAction: req.body.callsToAction,
+    recipientName: req.body.recipientName,
+    recipientEmail: req.body.recipientEmail,
+    videoURL: req.body.videoURL
+  });
+
+  emailURL = "https://gratitude-project.netlify.com/g/" + newMessage._id
+
   const email = {
     to: req.body.recipientEmail,
     from: "test@test.com",
     templateId: 'd-95ecec114f8b4fe7984adb619daa2cc3',
     dynamic_template_data: {
-      subject: 'Extending our gratitude!',
+      subject: 'Gratitude Message For You',
       beneficiaryName: req.body.beneficiaryName,
       recipientName: req.body.recipientName,
-      videoURL: req.body.videoURL, 
+      videoURL: emailURL
     }
   };
 
@@ -88,14 +123,6 @@ router.post("/", (req, res) => {
     .send(email)
     .then(response => {
       //on success of email store gratitude message on database
-      const newMessage = new Message({
-        beneficiaryName: req.body.beneficiaryName,
-        callsToAction: req.body.callsToAction,
-        recipientName: req.body.recipientName,
-        recipientEmail: req.body.recipientEmail,
-        videoURL: req.body.videoURL
-      });
-
       newMessage
         .save()
         .then(newMessage => {

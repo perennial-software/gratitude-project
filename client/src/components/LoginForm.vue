@@ -48,7 +48,7 @@ import store from "./../store";
 Vue.use(VueRouter);
 const axios = require("axios").default;
 const lsCheck = require("./../LScheck");
-const login_end = "http://localhost:5000/api/users/login";
+const login_end = "https://ourgp.herokuapp.com/api/users/login";
 const jwt = require("jsonwebtoken");
 // const router = new VueRouter();
 

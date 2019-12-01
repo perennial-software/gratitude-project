@@ -1,19 +1,15 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:5000/api" // update later
+  baseURL: "https://ourgp.herokuapp.com/api" // TODO: ignas to change this back to heroku
   // can add credentials and such here
 });
 export default {
   getMessages() {
-    console.log("axios call started");
     axios.defaults.headers.common["Authorization"] = localStorage.token;
     let lst_messages = [];
-    let result = axios.get("http://localhost:5000/api/messages").then(
+    let result = axios.get("https://ourgp.herokuapp.com/api/messages").then(
       response => {
-        // lst_messages = response.data.map(function(item){
-        //   return item;
-        // })
         lst_messages = response.data;
         return lst_messages;
       },
@@ -24,24 +20,17 @@ export default {
     return result;
   },
   getMessage(messageID) {
-    return apiClient.get(`/messages/${messageID}`);
+    return apiClient.get(`https://ourgp.herokuapp.com/api/messages/${messageID}`);
   },
 
   // Adds message to database and sends email to recipient
   postMessage(message) {
-    apiClient.post(`/messages/`, {
+    return apiClient.post(`https://ourgp.herokuapp.com/api/messages/`, {
         beneficiaryName: message.beneficiaryName, 
         recipientName: message.recipientName, 
         recipientEmail: message.recipientEmail, 
-        callsToAction: JSON.stringify(message.callsToAction),  // TODO: double check stringify will render JSON object 
-        videoURL: message.videoURL
+        callsToAction: message.callsToAction,  
+        videoURL: message.videoUrl
     })
-    .then(response => {
-      return response.data
-    })
-    .catch(err => {
-      console.log("Error sending message")
-      return err
-    });
   }
 };
