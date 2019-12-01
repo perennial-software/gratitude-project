@@ -40,6 +40,14 @@
           </v-data-table>
         </v-card>
       </v-card>
+      <div class="flex justify-center">
+        <router-link
+          :to="{ name: 'Create' }"
+          tag="button"
+          class="w-full my-5 md:w-auto bg-gray-100 hover:bg-gray-200 text-blue-800 text-xl py-4 px-16 rounded-full shadow-lg"
+          >Create message</router-link
+        >
+      </div>
     </div>
   </div>
 </template>
