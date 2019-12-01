@@ -25,7 +25,7 @@ export default {
 
   // Adds message to database and sends email to recipient
   postMessage(message) {
-    return apiClient.post(`https://ourgp.herokuapp.com/apis/messages/`, {
+    return apiClient.post(`https://ourgp.herokuapp.com/api/messages/`, {
         beneficiaryName: message.beneficiaryName, 
         recipientName: message.recipientName, 
         recipientEmail: message.recipientEmail, 
