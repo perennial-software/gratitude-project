@@ -97,6 +97,17 @@ router.post("/", (req, res) => {
     return res.status(400).json(errors);
   }
 
+  const newMessage = new Message({
+    beneficiaryName: req.body.beneficiaryName,
+    callsToAction: req.body.callsToAction,
+    recipientName: req.body.recipientName,
+    recipientEmail: req.body.recipientEmail,
+    videoURL: req.body.videoURL
+  });
+
+  // TODO: need to change this to our actual domain
+  emailURL = "http://localhost:8080/g/" + newMessage._id
+
   const email = {
     to: req.body.recipientEmail,
     from: "test@test.com",
@@ -105,7 +116,7 @@ router.post("/", (req, res) => {
       subject: 'Gratitude Message For You',
       beneficiaryName: req.body.beneficiaryName,
       recipientName: req.body.recipientName,
-      videoURL: req.body.videoURL, 
+      videoURL: emailURL
     }
   };
 
@@ -113,14 +124,6 @@ router.post("/", (req, res) => {
     .send(email)
     .then(response => {
       //on success of email store gratitude message on database
-      const newMessage = new Message({
-        beneficiaryName: req.body.beneficiaryName,
-        callsToAction: req.body.callsToAction,
-        recipientName: req.body.recipientName,
-        recipientEmail: req.body.recipientEmail,
-        videoURL: req.body.videoURL
-      });
-
       newMessage
         .save()
         .then(newMessage => {

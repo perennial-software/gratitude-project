@@ -30,7 +30,6 @@ export default {
       event_category: "gratitude_message",
       event_label: `${this.id}`
     });
-    console.log("THIS IS THE ID " + this.id)
     this.loadGratitudeMessage(this.id);
   },
   watch: {
@@ -43,8 +42,6 @@ export default {
       // Updated express endpoint
       MessagesService.getMessage(messageId)
       .then(gratitudeMessage => {
-        console.log("GOT RESPONSE")
-        console.log(gratitudeMessage.data)
         this.gratitudeMessage = gratitudeMessage.data;
       })
       .catch(err => {
