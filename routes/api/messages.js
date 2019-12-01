@@ -105,8 +105,7 @@ router.post("/", (req, res) => {
     videoURL: req.body.videoURL
   });
 
-  // TODO: need to change this to our actual domain
-  emailURL = "http://localhost:8080/g/" + newMessage._id
+  emailURL = "https://gratitude-project.netlify.com/g/" + newMessage._id
 
   const email = {
     to: req.body.recipientEmail,

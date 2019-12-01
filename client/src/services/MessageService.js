@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:5000/api" // TODO: ignas to change this back to heroku
+  baseURL: "https://ourgp.herokuapp.com/api" // TODO: ignas to change this back to heroku
   // can add credentials and such here
 });
 export default {
@@ -20,12 +20,12 @@ export default {
     return result;
   },
   getMessage(messageID) {
-    return apiClient.get(`/messages/${messageID}`);
+    return apiClient.get(`https://ourgp.herokuapp.com/api/messages/${messageID}`);
   },
 
   // Adds message to database and sends email to recipient
   postMessage(message) {
-    return apiClient.post(`/messages/`, {
+    return apiClient.post(`https://ourgp.herokuapp.com/apis/messages/`, {
         beneficiaryName: message.beneficiaryName, 
         recipientName: message.recipientName, 
         recipientEmail: message.recipientEmail, 
