@@ -21,7 +21,7 @@
           type="text"
           id="beneficiary-name"
           data-cy="beneficiary-name"
-          class="cta-input form-input w-full border-2 bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
+          class="cta-input form-input w-full border-solid border-2 bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
           :value="gratitudeMessage.beneficiaryName"
           @input="updateBeneficiaryName($event.target.value)"
         />
@@ -32,7 +32,7 @@
           type="text"
           id="recipient-name"
           data-cy="recipient-name"
-          class="cta-input form-input w-full border-2 bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
+          class="cta-input form-input w-full border-solid border-2 bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
           :value="gratitudeMessage.recipientName"
           @input="updateRecipientName($event.target.value)"
         />
@@ -43,7 +43,7 @@
           type="text"
           id="recipient-email"
           data-cy="recipient-email"
-          class="cta-input form-input w-full border-2 bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
+          class="cta-input form-input w-full border-solid border-2 bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
           :value="gratitudeMessage.recipientEmail"
           @input="updateRecipientEmail($event.target.value)"
         />
@@ -61,7 +61,7 @@
               type="text"
               id="video-link"
               data-cy="video-link"
-              class="cta-input form-input w-full border-2 bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
+              class="cta-input form-input w-full border-solid border-2 bg-transparent rounded-full py-2 px-5 outline-none font-bold text-lg"
               :value="gratitudeMessage.videoUrl"
               @input="updateVideoUrl($event.target.value)"
               :disabled="isUploaded"
@@ -113,7 +113,7 @@
             data-cy="cta-button-text"
             :aria-label="`Title ${i + 1}`"
             :placeholder="`Title ${i + 1}`"
-            class="cta-input form-input w-full bg-transparent border-b-2 font-bold text-2xl outline-none pb-2 leading-none"
+            class="cta-input form-input placeholder-gray-400 w-full bg-transparent border-solid border-b-2 font-bold text-2xl outline-none pb-2 leading-none"
             :value="cta.buttonText"
             @input="updateCtaButtonText(i, $event.target.value)"
           />
@@ -124,7 +124,7 @@
             data-cy="cta-link"
             aria-label="Link or Email Address"
             placeholder="Link or Email Address"
-            class="cta-input form-input w-full bg-transparent border-b-2 font-bold outline-none pb-2 leading-none"
+            class="cta-input form-input placeholder-gray-400 w-full bg-transparent border-solid border-b-2 font-bold outline-none pb-2 leading-none"
             :value="cta.link"
             @input="updateCtaLink(i, $event.target.value)"
           />
@@ -136,7 +136,7 @@
             data-cy="cta-description"
             aria-label="CTA Description (required)"
             placeholder="CTA Description (required)"
-            class="form-textarea flex-auto bg-transparent font-bold outline-none"
+            class="form-textarea placeholder-gray-400 flex-auto bg-transparent font-bold outline-none"
             :value="cta.description"
             @input="updateCtaDescription(i, $event.target.value)"
           />
