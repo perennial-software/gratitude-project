@@ -11,6 +11,7 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import GratitudeMessageDetail from "@/components/GratitudeMessageDetail.vue";
+import MessagesService from "../services/MessageService";
 
 export default {
   name: "item",
@@ -29,7 +30,7 @@ export default {
       event_category: "gratitude_message",
       event_label: `${this.id}`
     });
-
+    console.log("THIS IS THE ID " + this.id)
     this.loadGratitudeMessage(this.id);
   },
   watch: {
@@ -39,9 +40,19 @@ export default {
   },
   methods: {
     loadGratitudeMessage(messageId) {
-      this.$api.getGratitudeMessage(messageId).then(gratitudeMessage => {
+      // Updated express endpoint
+      MessagesService.getMessage(messageId)
+      .then(gratitudeMessage => {
         this.gratitudeMessage = gratitudeMessage;
-      });
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+      // this.$api.getGratitudeMessage(messageId).then(gratitudeMessage => {
+      //   this.gratitudeMessage = gratitudeMessage;
+      // }
+      // );
     }
   },
   data() {

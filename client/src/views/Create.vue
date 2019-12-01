@@ -84,28 +84,24 @@ export default {
       var result = MessagesService.postMessage(gratitudeMessage)
       .then(message => {
         console.log(JSON.stringify(message))
-        alert(JSON.stringify(message), null, 4)
+        // alert(JSON.stringify(message), null, 4)
         this.msgText = "Message Sent"
         // gtag stats 
         this.$gtag("event", "create_message", {
           event_category: "gratitude_message",
           event_label: `${message.data._id}`
         });
-        console.log("updated cloud")
         // redirect to new page on success
         this.$router.push({ name: "Item", params: { id: message.data._id } });
-        console.log("wow redirect")
       })
       .catch(error => {
           var error_msg = "*Error: "
           console.log("Error: ", error.response);
           if (!error.response.data.response && !error.response.data.errors){
-            console.log("in this")
             for(const [key, value] of Object.entries(error.response.data)) {
               error_msg += value + "\n";
             }
           } else if (!error.response.data.errors && !error.response.data.error) {
-            console.log("in that")
             error_msg += error.response.data.response.body.errors[0]["message"];
           } else {
             // alert(JSON.stringify(error.response.data.errors))

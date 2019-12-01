@@ -42,6 +42,30 @@ router.get(
   }
 );
 
+//  @route GET api/messages/:messageID
+//  @desc Gets specific message 
+//  @access Public
+router.get(
+  "/:messageID",
+  (req, res) => {
+    let errors = {};
+
+    Message.findById(req.params.messageID)
+      .then(message => {
+        if (!message) {
+          errors.noMessages = "Message not found";
+          return res.status(404).json(errors);
+        }
+        console.log(message);
+        return res.json(message);
+      })
+      .catch(err => {
+        console.log(err);
+        return res.status(404).json(err);
+      });
+  }
+);
+
 //  @route GET api/messages/
 //  @desc Create User Messages (Protected Endpoint) (Check messages model to learn about expected request body)
 //  An example request body would be the following,

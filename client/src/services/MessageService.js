@@ -24,6 +24,8 @@ export default {
     return result;
   },
   getMessage(messageID) {
+    console.log("GET MESSAGE " + messageID)
+    // console.log(`https://ourgp.herokuapp.com/api/messages/${messageID}`)
     return apiClient.get(`/messages/${messageID}`);
   },
 
