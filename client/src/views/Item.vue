@@ -43,16 +43,13 @@ export default {
       // Updated express endpoint
       MessagesService.getMessage(messageId)
       .then(gratitudeMessage => {
-        this.gratitudeMessage = gratitudeMessage;
+        console.log("GOT RESPONSE")
+        console.log(gratitudeMessage.data)
+        this.gratitudeMessage = gratitudeMessage.data;
       })
       .catch(err => {
         console.log(err)
       })
-
-      // this.$api.getGratitudeMessage(messageId).then(gratitudeMessage => {
-      //   this.gratitudeMessage = gratitudeMessage;
-      // }
-      // );
     }
   },
   data() {

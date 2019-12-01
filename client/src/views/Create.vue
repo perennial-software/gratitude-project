@@ -104,8 +104,6 @@ export default {
           } else if (!error.response.data.errors && !error.response.data.error) {
             error_msg += error.response.data.response.body.errors[0]["message"];
           } else {
-            // alert(JSON.stringify(error.response.data.errors))
-            // error_msg += error.response.data.errors[0]["message"];
             error_msg += "description for a Call To Action button is required"
           }
           self.msgText = error_msg;
@@ -113,15 +111,6 @@ export default {
           var statusMsgElement = document.getElementById('statusMsg');
           statusMsgElement.scrollIntoView();
       });
-
-      // old code 
-      // this.$api.postGratitudeMessage(gratitudeMessage).then(message => {
-      //   this.$gtag("event", "create_message", {
-      //     event_category: "gratitude_message",
-      //     event_label: `${message.id}`
-      //   });
-      //   this.$router.push({ name: "Item", params: { id: message.id } });
-      // });
     }
   }
 };

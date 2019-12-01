@@ -17,7 +17,7 @@
     <div class="flex relative justify-center mb-4" style="padding-top: 56.25%;">
       <iframe
         class="absolute inset-0 w-full h-full"
-        :src="gratitudeMessage.videoUrl"
+        :src="gratitudeMessage.videoURL"
         frameborder="0"
         allow="autoplay; fullscreen"
         allowfullscreen

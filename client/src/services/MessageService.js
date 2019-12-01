@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "https://ourgp.herokuapp.com/api" // update later
+  baseURL: "http://localhost:5000/api" // can update if you wish
   // can add credentials and such here
 });
 export default {
@@ -11,9 +11,6 @@ export default {
     let lst_messages = [];
     let result = axios.get("https://ourgp.herokuapp.com/api/messages").then(
       response => {
-        // lst_messages = response.data.map(function(item){
-        //   return item;
-        // })
         lst_messages = response.data;
         return lst_messages;
       },
@@ -31,9 +28,8 @@ export default {
 
   // Adds message to database and sends email to recipient
   postMessage(message) {
-    // let message = JSON.parse(msg)
-    console.log("POST " + message)
-
+    console.log("POST ")
+    console.log(message.callsToAction)
     return apiClient.post(`/messages/`, {
         beneficiaryName: message.beneficiaryName, 
         recipientName: message.recipientName, 
